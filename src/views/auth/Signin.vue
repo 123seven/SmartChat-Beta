@@ -28,13 +28,16 @@ async function SignIn() {
       SignInData.password
     )
     authStore.setToken(data.token)
-    userStore.updateUserInfo({...data, avatar:data.avatar_url})
+    if (!data.avatar_url) {
+      data.avatar_url = 'https://files.catbox.moe/tyr8zm.png'
+    }
+    userStore.updateUserInfo({ ...data, avatar: data.avatar_url })
     userStore.setUserAuth()
     router.push('/')
   } catch (error: any) {
     console.log('SignIn Error', error)
     ElMessage({
-      type: 'success',
+      type: 'error',
       message: error.message,
     })
   }
@@ -124,6 +127,7 @@ async function SignIn() {
           </p>
 
           <a
+            diasbled
             href="#"
             class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
@@ -150,12 +154,12 @@ async function SignIn() {
           </a>
 
           <div class="mt-6 text-center">
-            <a
-              href="#"
+            <router-link
+              to="/signup"
               class="text-sm text-blue-500 hover:underline dark:text-blue-400"
             >
               Don’t have an account yet? Sign up
-            </a>
+            </router-link>
           </div>
         </div>
       </form>

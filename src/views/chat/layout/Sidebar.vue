@@ -23,6 +23,8 @@ router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
 
 const showDeleteIndex = ref<number>()
 
+console.log('route', route)
+console.log('path', route.path)
 // 导航栏
 const navigation = computed(() => {
   const navigation = [
@@ -31,7 +33,7 @@ const navigation = computed(() => {
       name: 'chat',
       icon: ChatBubbleOvalLeftEllipsisIcon,
       href: '/chat',
-      auth: false,
+      pathName: 'Chat',
     },
   ]
   if (userStore.userInfo.auth) {
@@ -40,19 +42,19 @@ const navigation = computed(() => {
         name: 'settings',
         icon: Cog8ToothIcon,
         href: '/chat/settings',
-        auth: true,
+        pathName: 'Settings',
       },
       {
         name: 'members',
         icon: UsersIcon,
         href: '/chat/members',
-        auth: true,
+        pathName: 'Members',
       },
       {
         name: 'apps',
         icon: SquaresPlusIcon,
         href: '/chat/apps',
-        auth: true,
+        pathName: 'Spps',
       }
     )
   }
@@ -171,7 +173,7 @@ const bgColorList = [
           :to="item.href"
           class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
           :class="[
-            route.path === item.href
+            route.name === item.pathName
               ? 'bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-700'
               : '',
           ]"
@@ -276,7 +278,7 @@ const bgColorList = [
 
       <!-- 退出登录 -->
       <el-tooltip content="退出登录" placement="bottom">
-        <a
+        <div
           @click="handleSignOut"
           href="#"
           class="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
@@ -295,15 +297,17 @@ const bgColorList = [
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
             />
           </svg>
-        </a>
+        </div>
       </el-tooltip>
     </div>
 
     <div v-else class="flex items-center justify-between mt-8">
-      <ArrowLeftOnRectangleIcon
-        @click="handleSignIn"
-        class="w-5 h-5 text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
-      ></ArrowLeftOnRectangleIcon>
+      <el-tooltip content="登录" placement="bottom">
+        <ArrowLeftOnRectangleIcon
+          @click="handleSignIn"
+          class="w-5 h-5 text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
+        ></ArrowLeftOnRectangleIcon>
+      </el-tooltip>
     </div>
   </div>
 </template>

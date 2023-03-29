@@ -59,3 +59,14 @@ export function fetchSignIn<T>(email: string, password: string) {
     data: { email: email, password: password },
   })
 }
+
+export function fetchSignUp<T>(
+  username: string,
+  email: string,
+  password: string
+) {
+  return post<T>({
+    url: '/api/v1/user/signup',
+    data: { username: username, email: email, password: password },
+  })
+}

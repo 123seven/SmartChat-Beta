@@ -1,4 +1,7 @@
 import RightMessage from './Messages/RightMessage.vue'
 import LeftMessage from './Messages/LeftMessage.vue'
 
-export { RightMessage, LeftMessage }
+import SystemSetting from './Settings/SystemSetting.vue'
+import GPTSetting from './Settings/GPTSetting.vue'
+
+export { RightMessage, LeftMessage, SystemSetting, GPTSetting }
