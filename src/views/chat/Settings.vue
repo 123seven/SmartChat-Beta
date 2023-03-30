@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { SystemSetting ,GPTSetting} from './components'
+import { SystemSetting ,UserSetting} from './components'
 
 
 
@@ -7,7 +7,7 @@ import { SystemSetting ,GPTSetting} from './components'
 
 <template>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:m-12">
-    <GPTSetting></GPTSetting>
+    <UserSetting></UserSetting>
     <SystemSetting></SystemSetting>
   </div>
 </template>

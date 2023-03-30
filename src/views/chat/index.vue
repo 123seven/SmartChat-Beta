@@ -27,7 +27,7 @@ import { useChat } from './hooks/useChat'
 import { useScroll } from './hooks/useScroll'
 import { useCopyCode } from './hooks/useCopyCode'
 import { useUsingContext } from './hooks/useUsingContext'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
@@ -36,12 +36,15 @@ import { formatDate } from '@/utils/format'
 let controller = new AbortController()
 
 const route = useRoute()
-const appStore = useAppStore()
+const router = useRouter()
 const userStore = useUserStore()
 const chatStore = useChatStore()
+const appStore = useAppStore()
 const { theme } = useTheme()
 const { enterSend } = useEnterSend()
 useCopyCode()
+
+router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
 
 const { isMobile } = useBasicLayout()
 const { addChat, updateChat, updateChatSome, getChatByUuidAndIndex } = useChat()
@@ -132,7 +135,8 @@ async function onConversation() {
           const xhr = event.target
           const { responseText } = xhr
           // Always process the final line
-          const lastIndex = responseText.lastIndexOf('\n',
+          const lastIndex = responseText.lastIndexOf(
+            '\n',
             responseText.length - 2
           )
           let chunk = responseText
@@ -162,7 +166,7 @@ async function onConversation() {
             scrollToBottom()
             // scrollToBottomIfAtBottom()
           } catch (error) {
-            console.log("error",error)
+            console.log('error', error)
             // error
           }
         },
@@ -590,7 +594,7 @@ onUnmounted(() => {
           v-model="prompt"
           @keypress="handleEnter"
           type="text"
-          class="block w-full py-2.5 text-gray-700 placeholder-gray-400/70  border  rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11  focus:border-blue-400  focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 dark:bg-[#161618] dark:text-gray-300"
+          class="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 border rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 dark:bg-[#161618] dark:text-gray-300 dark:border-[#10b982]"
         />
       </div>
     </div>

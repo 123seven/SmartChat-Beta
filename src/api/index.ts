@@ -70,3 +70,26 @@ export function fetchSignUp<T>(
     data: { username: username, email: email, password: password },
   })
 }
+
+export function fetchUserSettings<T>() {
+  return get<T>({
+    url: '/api/v1/user/settings',
+  })
+}
+
+export function saveUserSettings<T>(
+  avatar?: string,
+  username?: string,
+  apiKey?: string,
+  modelId?: number
+) {
+  return post<T>({
+    url: '/api/v1/user/settings',
+    data: {
+      avatar: avatar,
+      username: username,
+      apiKey: apiKey,
+      modelId: modelId,
+    },
+  })
+}

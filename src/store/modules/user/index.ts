@@ -15,6 +15,11 @@ export const useUserStore = defineStore('user-store', {
       this.recordState()
     },
 
+    setUserSignOut() {
+      this.userInfo.auth = false
+      this.recordState()
+    },
+
     resetUserInfo() {
       this.userInfo = { ...defaultSetting().userInfo }
       this.recordState()

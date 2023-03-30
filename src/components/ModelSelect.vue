@@ -31,7 +31,7 @@ const models = [
 const selected = ref(models[4])
 
 function setModel(modelId: string | number) {
-  console.log("modelId",modelId)
+  console.log('modelId', modelId)
   // appStore.setLanguage(language)
 }
 </script>
@@ -43,7 +43,7 @@ function setModel(modelId: string | number) {
     }}</ListboxLabel>
     <div class="relative mt-1">
       <ListboxButton
-        class="relative w-1/2 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+        class="relative w-1/2 cursor-default rounded-md border border-gray-300 bg-white dark:bg-[#252529] dark:text-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
       >
         <span class="flex items-center">
           <span
@@ -68,7 +68,7 @@ function setModel(modelId: string | number) {
         leave-to-class="opacity-0"
       >
         <ListboxOptions
-          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-[#252529] dark:text-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
           <ListboxOption
             as="template"
@@ -81,7 +81,7 @@ function setModel(modelId: string | number) {
             <li
               :class="[
                 active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                'relative cursor-default select-none py-2 pl-3 pr-9',
+                'relative cursor-default select-none py-2 pl-3 pr-9 dark:bg-[#252529] dark:text-white',
               ]"
             >
               <div class="flex items-center">

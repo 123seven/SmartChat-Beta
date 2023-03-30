@@ -1,6 +1,6 @@
 import type { AxiosProgressEvent, AxiosResponse, GenericAbortSignal } from 'axios'
 import request from './axios'
-import { useAuthStore } from '@/store'
+import { useAuthStore,useUserStore } from '@/store'
 
 export interface HttpOption {
   url: string
@@ -24,13 +24,15 @@ function http<T = any>(
 ) {
   const successHandler = (res: AxiosResponse<Response<T>>) => {
     const authStore = useAuthStore()
-    console.log("res.data.",res.data)
+    console.log("res.data.",res)
 
     if (res.data.code === 'SUCCESS' || typeof res.data === 'string')
       return res.data
 
-    if (res.data.code === 'Unauthorized') {
+    if (res.data.code === '"SERVICE_ERROR"') {
+      const userStore = useUserStore()
       authStore.removeToken()
+      userStore.setUserSignOut()
       window.location.reload()
     }
 

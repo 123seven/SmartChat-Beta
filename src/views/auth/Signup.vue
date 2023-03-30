@@ -100,7 +100,7 @@ async function SignUp() {
     <div
       class="container flex items-center justify-center min-h-screen px-6 mx-auto"
     >
-      <form class="w-full max-w-md">
+      <div class="w-full max-w-md">
         <div class="flex justify-center mx-auto">
           <img
             class="w-auto h-7 sm:h-8"
@@ -240,7 +240,7 @@ async function SignUp() {
             </router-link>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </section>
 </template>

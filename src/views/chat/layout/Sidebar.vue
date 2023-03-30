@@ -19,8 +19,6 @@ const chatStore = useChatStore()
 const authStore = useAuthStore()
 const dataSources = computed(() => chatStore.history)
 
-router.replace({ name: 'Chat', params: { uuid: chatStore.active } })
-
 const showDeleteIndex = ref<number>()
 
 console.log('route', route)

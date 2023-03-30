@@ -22,16 +22,16 @@ const httpsProxyStatus = ref(false)
 <template>
   <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="mt-5 md:col-span-4 md:mt-0">
-      <form action="#" method="POST" class="h-full">
+      <div class="h-full">
         <div
-          class="grid shadow sm:overflow-hidden sm:rounded-md h-full dark:bg-gray-800"
+          class="grid shadow sm:overflow-hidden sm:rounded-md h-full dark:bg-[#252529]"
         >
           <div class="space-y-6 px-4 py-5 sm:p-6">
             <div>
               <h3 class="text-lg font-medium leading-6">
                 {{ t('common.settings') }}
               </h3>
-              <p class="mt-1 text-sm text-gray-500">
+              <p class="mt-2 text-sm text-gray-500">
                 {{ t('common.sysBaseSettings') }}
               </p>
             </div>
@@ -173,7 +173,7 @@ const httpsProxyStatus = ref(false)
               </div>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 self-end">
+          <div class="bg-gray-50 dark:bg-[#161618] px-4 py-3 text-right sm:px-6 self-end">
             <button
               type="submit"
               class="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
@@ -182,7 +182,7 @@ const httpsProxyStatus = ref(false)
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>

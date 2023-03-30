@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   Listbox,
   ListboxButton,
@@ -11,39 +11,42 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { useAppStore } from '@/store'
 import { useLanguage } from '@/hooks/useLanguage'
 import { t } from '@/locales'
-
+import { Language } from '@/store/modules/app/helper'
 
 const appStore = useAppStore()
+// const { language } = useLanguage()
 
-const { language } = useLanguage()
+interface languageItem {
+  name: string
+  online: boolean
+  language: Language
+}
 
-
-const languages = [
+const languages: Array<languageItem> = [
   { name: '简体中文', online: true, language: 'zh-CN' },
-  { name: '繁體中文', online: false, language: 'zh-HK' },
+  { name: '繁體中文', online: false, language: 'zh-TW' },
   { name: 'English', online: true, language: 'en-US' },
 ]
 
 
 
-
-
-
-const selected = ref(languages[0])
-
-
-function setLanguage(language:string){
-  console.log("language",language)
-  appStore.setLanguage(language)
-}
+const selected = computed({
+  get: () => languages.find(element => element.language == appStore.language),
+  set: (val) => {
+    appStore.setLanguage(val.language)
+    window.location.reload()    
+  },
+})
 </script>
 
 <template>
   <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium text-gray-700">{{t('setting.language')}}</ListboxLabel>
+    <ListboxLabel class="block text-sm font-medium text-gray-700">{{
+      t('setting.language')
+    }}</ListboxLabel>
     <div class="relative mt-1">
       <ListboxButton
-        class="relative w-1/2  cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+        class="relative w-1/2 cursor-default rounded-md border border-gray-300 bg-white dark:bg-[#252529] dark:text-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
       >
         <span class="flex items-center">
           <span
@@ -68,21 +71,19 @@ function setLanguage(language:string){
         leave-to-class="opacity-0"
       >
         <ListboxOptions
-          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-[#252529] dark:text-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
           <ListboxOption
             as="template"
-
             v-for="item in languages"
             :key="item.name"
             :value="item"
-            @change="setLanguage(item.language)"
             v-slot="{ active, selected }"
           >
             <li
               :class="[
                 active ? 'text-white bg-indigo-600' : 'text-gray-900',
-                'relative cursor-default select-none py-2 pl-3 pr-9',
+                'relative cursor-default select-none py-2 pl-3 pr-9 dark:bg-[#252529] dark:text-white',
               ]"
             >
               <div class="flex items-center">
