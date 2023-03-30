@@ -1,7 +1,7 @@
 <template>
   <div class="px-6 py-2 mx-auto">
     <div
-      class="max-w-2xl p-1.5 mx-auto overflow-hidden bg-gray-100 rounded-lg dark:bg-gray-800"
+      class="max-w-2xl p-1.5 mx-auto overflow-hidden bg-gray-100 rounded-lg dark:bg-[#252529]"
     >
       <div class="grid gap-3 md:grid-cols-3">
         <button
@@ -36,7 +36,7 @@
       class="flex flex-col items-center justify-center  mt-16 space-y-3 md:items-end md:-mx-5 md:space-y-0 md:flex-row"
     >
       <div
-        class="w-full px-6 py-4 transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-gray-800"
+        class="w-full px-6 py-4 transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
       >
         <div class="text-center">
           <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
@@ -150,14 +150,14 @@
         </div>
 
         <button
-          class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-300 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
         >
-          选择 Basic
+          当前选择
         </button>
       </div>
 
       <div
-        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-gray-800"
+        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
       >
         <p class="py-2 text-sm text-center text-white uppercase bg-blue-500">
           专家推荐
@@ -290,7 +290,7 @@
       </div>
 
       <div
-        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-gray-800"
+        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
       >
         <div class="px-6 py-4">
           <div class="text-center">
