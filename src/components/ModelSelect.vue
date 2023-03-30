@@ -39,7 +39,7 @@ function setModel(modelId: string | number) {
 <template>
   <Listbox as="div" v-model="selected">
     <ListboxLabel class="block text-sm font-medium text-gray-700">{{
-      t('setting.language')
+      t('common.gptModel')
     }}</ListboxLabel>
     <div class="relative mt-1">
       <ListboxButton

@@ -60,8 +60,10 @@ export default {
     chats: '對話記錄',
     search: '搜索',
     send: '發送',
-    members:'团队',
-    apps:'应用'
+    app: '应用',
+    members: '團隊',
+    apps: '應用',
+    upgrade: '升級',
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

@@ -7,6 +7,7 @@ import {
   XCircleIcon,
   ArrowLeftOnRectangleIcon,
   SquaresPlusIcon,
+  ArrowUpCircleIcon
 } from '@heroicons/vue/24/outline'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore, useChatStore, useAuthStore } from '@/store'
@@ -32,6 +33,7 @@ const navigation = computed(() => {
       icon: ChatBubbleOvalLeftEllipsisIcon,
       href: '/chat',
       pathName: 'Chat',
+
     },
   ]
   if (userStore.userInfo.auth) {
@@ -41,6 +43,12 @@ const navigation = computed(() => {
         icon: Cog8ToothIcon,
         href: '/chat/settings',
         pathName: 'Settings',
+      },
+      {
+        name: 'upgrade',
+        icon: ArrowUpCircleIcon,
+        href: '/chat/upgrade',
+        pathName: 'Upgrade',
       },
       {
         name: 'members',

@@ -15,8 +15,7 @@ const { theme } = useTheme()
 const socksProxyStatus = ref(false)
 const httpsProxyStatus = ref(false)
 
-// appStore.setTheme(theme)
-// appStore.setLanguage(value)
+
 </script>
 
 <template>
@@ -156,13 +155,13 @@ const httpsProxyStatus = ref(false)
                     @click="
                       () => {
                         httpsProxyStatus = !httpsProxyStatus
-                        socksProxyStatus = !false
+                        socksProxyStatus = false
                       }
                     "
                   >
                     <span
                       :class="[
-                        socksProxyStatus ? 'bg-green-400' : 'bg-gray-200',
+                        httpsProxyStatus ? 'bg-green-400' : 'bg-gray-200',
                       ]"
                       class="inline-block h-2 w-2 flex-shrink-0 rounded-full"
                       aria-hidden="true"

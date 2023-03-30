@@ -22,6 +22,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/chat/Settings.vue'),
       },
       {
+        path: '/chat/upgrade',
+        name: 'Upgrade',
+        component: () => import('@/views/chat/Upgrade.vue'),
+      },
+      {
         path: '/chat/members',
         name: 'Members',
         component: () => import('@/views/chat/Members.vue'),

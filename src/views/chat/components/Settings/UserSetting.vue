@@ -117,7 +117,7 @@ onMounted(() => {
 
           <div>
             <label class="block text-sm font-medium leading-6">
-              {{ t('common.photo') }}
+              {{ t('common.avatar') }}
             </label>
             <div class="mt-2 flex items-center">
               <span
@@ -203,7 +203,7 @@ onMounted(() => {
 
           <div>
             <label class="block text-sm font-medium leading-6">
-              {{ t('common.subscription') }}
+              {{ t('common.subscribe') }}
             </label>
             <div class="mt-2 flex items-center">
               <button
