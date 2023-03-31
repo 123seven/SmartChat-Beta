@@ -53,11 +53,11 @@ function goBack() {
       </div>
 
       <div class="relative w-full mt-12 lg:w-1/2 lg:mt-0">
-        <img
+        <!-- <img
           class="w-full max-w-lg lg:mx-auto"
           src="/images/components/illustration.svg"
           alt=""
-        >
+        > -->
       </div>
     </div>
   </section>
