@@ -28,8 +28,8 @@ interface UserSettings {
 }
 const userInfo = ref<UserSettings>({
   id: '',
-  avatar: 'https://files.catbox.moe/tyr8zm.png',
-  username: 'Steven Zhu',
+  avatar: '',
+  username: '',
   email: '',
   apiKey: '',
   modelId: 4,

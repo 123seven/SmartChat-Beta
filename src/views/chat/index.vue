@@ -84,227 +84,206 @@ function handleSubmit() {
 // 对话
 async function onConversation() {
   let message = prompt.value
-
-  if (loading.value) return
-
-  if (!message || message.trim() === '') return
-
+  if (loading.value)
+    return
+  if (!message || message.trim() === '')
+    return
   controller = new AbortController()
-
-  addChat(uuid, {
-    dateTime: new Date().toLocaleString(),
-    text: message,
-    inversion: true,
-    error: false,
-    conversationOptions: null,
-    requestOptions: { prompt: message, options: null },
-  })
+  addChat(
+    uuid,
+    {
+      dateTime: new Date().toLocaleString(),
+      text: message,
+      inversion: true,
+      error: false,
+      conversationOptions: null,
+      requestOptions: { prompt: message, options: null },
+    },
+  )
   scrollToBottom()
-
   loading.value = true
   prompt.value = ''
+  let options: Chat.ConversationRequest = { cid: uuid }
 
-  let options: Chat.ConversationRequest = { cid: chatStore.active }
-  const lastContext =
-    conversationList.value[conversationList.value.length - 1]
-      ?.conversationOptions
-
-  if (lastContext && usingContext.value)
-    options = { ...options, ...lastContext }
-
-  addChat(uuid, {
-    dateTime: new Date().toLocaleString(),
-    text: '',
-    loading: true,
-    inversion: false,
-    error: false,
-    conversationOptions: null,
-    requestOptions: { prompt: message, options: { ...options } },
-  })
+  if (usingContext.value)
+    options.usingContext = true
+  addChat(
+    uuid,
+    {
+      dateTime: new Date().toLocaleString(),
+      text: '',
+      loading: true,
+      inversion: false,
+      error: false,
+      conversationOptions: null,
+      requestOptions: { prompt: message, options: { ...options } },
+    },
+  )
   scrollToBottom()
-
   try {
-    let lastText = ''
-    let text = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+      await fetchChatAPIProcess({
         prompt: message,
         options,
         signal: controller.signal,
         onDownloadProgress: ({ event }) => {
           const xhr = event.target
           const { responseText } = xhr
-          // Always process the final line
-          const lastIndex = responseText.lastIndexOf(
-            '\n',
-            responseText.length - 2
-          )
-          let chunk = responseText
-          if (lastIndex !== -1) chunk = responseText.substring(lastIndex)
           try {
-            const data = JSON.parse(chunk)
-            text += data.text ?? ''
-            updateChat(uuid, dataSources.value.length - 1, {
-              dateTime: new Date().toLocaleString(),
-              text: lastText + text ?? '',
-              inversion: false,
-              error: false,
-              loading: false,
-              conversationOptions: {
-                conversationId: data.conversationId,
-                parentMessageId: data.id,
+            updateChat(
+              uuid,
+              dataSources.value.length - 1,
+              {
+                dateTime: new Date().toLocaleString(),
+                text: responseText ?? '',
+                inversion: false,
+                error: false,
+                loading: true,
+                conversationOptions: null,
+                requestOptions: { prompt: message, options: { ...options } },
               },
-              requestOptions: { prompt: message, options: { ...options } },
-            })
-
-            if (data.detail.choices[0].finish_reason === 'length') {
-              options.parentMessageId = data.id
-              lastText = data.text
-              message = ''
-              return fetchChatAPIOnce()
-            }
-            scrollToBottom()
-            // scrollToBottomIfAtBottom()
-          } catch (error) {
-            console.log('error', error)
-            // error
+            )
+            scrollToBottomIfAtBottom()
+          }
+          catch (error) {
+            //
           }
         },
       })
+      updateChatSome(uuid, dataSources.value.length - 1, { loading: false })
     }
-
     await fetchChatAPIOnce()
-  } catch (error: any) {
+  }
+  catch (error: any) {
     const errorMessage = error?.message ?? t('common.wrong')
-
     if (error.message === 'canceled') {
-      updateChatSome(uuid, dataSources.value.length - 1, {
-        loading: false,
-      })
+      updateChatSome(
+        uuid,
+        dataSources.value.length - 1,
+        {
+          loading: false,
+        },
+      )
       scrollToBottomIfAtBottom()
       return
     }
-
-    const currentChat = getChatByUuidAndIndex(
-      uuid,
-      dataSources.value.length - 1
-    )
-
+    const currentChat = getChatByUuidAndIndex(uuid, dataSources.value.length - 1)
     if (currentChat?.text && currentChat.text !== '') {
-      updateChatSome(uuid, dataSources.value.length - 1, {
-        text: `${currentChat.text}\n[${errorMessage}]`,
-        error: false,
-        loading: false,
-      })
+      updateChatSome(
+        uuid,
+        dataSources.value.length - 1,
+        {
+          text: `${currentChat.text}\n[${errorMessage}]`,
+          error: false,
+          loading: false,
+        },
+      )
       return
     }
-
-    updateChat(uuid, dataSources.value.length - 1, {
-      dateTime: new Date().toLocaleString(),
-      text: errorMessage,
-      inversion: false,
-      error: true,
-      loading: false,
-      conversationOptions: null,
-      requestOptions: { prompt: message, options: { ...options } },
-    })
-    scrollToBottom()
-  } finally {
+    updateChat(
+      uuid,
+      dataSources.value.length - 1,
+      {
+        dateTime: new Date().toLocaleString(),
+        text: errorMessage,
+        inversion: false,
+        error: true,
+        loading: false,
+        conversationOptions: null,
+        requestOptions: { prompt: message, options: { ...options } },
+      },
+    )
+    scrollToBottomIfAtBottom()
+  }
+  finally {
     loading.value = false
   }
 }
 
 // 重新生成回答
 async function onRegenerate(index: number) {
-  if (loading.value) return
-
+  if (loading.value)
+    return
   controller = new AbortController()
-
   const { requestOptions } = dataSources.value[index]
-
   let message = requestOptions?.prompt ?? ''
-
-  let options: Chat.ConversationRequest = {}
-
-  if (requestOptions.options) options = { ...requestOptions.options }
-
+  let options: Chat.ConversationRequest = { cid: uuid }
+  if (requestOptions.options)
+    options.usingContext = true
   loading.value = true
-
-  updateChat(uuid, index, {
-    dateTime: new Date().toLocaleString(),
-    text: '',
-    inversion: false,
-    error: false,
-    loading: true,
-    conversationOptions: null,
-    requestOptions: { prompt: message, ...options },
-  })
-
+  updateChat(
+    uuid,
+    index,
+    {
+      dateTime: new Date().toLocaleString(),
+      text: '',
+      inversion: false,
+      error: false,
+      loading: true,
+      conversationOptions: null,
+      requestOptions: { prompt: message, ...options },
+    },
+  )
   try {
-    let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+      await fetchChatAPIProcess({
         prompt: message,
         options,
         signal: controller.signal,
         onDownloadProgress: ({ event }) => {
           const xhr = event.target
           const { responseText } = xhr
-          // Always process the final line
-          const lastIndex = responseText.lastIndexOf(
-            '\n',
-            responseText.length - 2
-          )
-          let chunk = responseText
-          if (lastIndex !== -1) chunk = responseText.substring(lastIndex)
           try {
-            const data = JSON.parse(chunk)
-            updateChat(uuid, index, {
-              dateTime: new Date().toLocaleString(),
-              text: lastText + data.text ?? '',
-              inversion: false,
-              error: false,
-              loading: false,
-              conversationOptions: {
-                conversationId: data.conversationId,
-                parentMessageId: data.id,
+            updateChat(
+              uuid,
+              index,
+              {
+                dateTime: new Date().toLocaleString(),
+                text: responseText ?? '',
+                inversion: false,
+                error: false,
+                loading: true,
+                conversationOptions: null,
+                requestOptions: { prompt: message, ...options },
               },
-              requestOptions: { prompt: message, ...options },
-            })
-
-            if (data.detail.choices[0].finish_reason === 'length') {
-              options.parentMessageId = data.id
-              lastText = data.text
-              message = ''
-              return fetchChatAPIOnce()
-            }
-          } catch (error) {
+            )
+          }
+          catch (error) {
             //
           }
         },
       })
+      updateChatSome(uuid, index, { loading: false })
     }
     await fetchChatAPIOnce()
-  } catch (error: any) {
+  }
+  catch (error: any) {
     if (error.message === 'canceled') {
-      updateChatSome(uuid, index, {
-        loading: false,
-      })
+      updateChatSome(
+        uuid,
+        index,
+        {
+          loading: false,
+        },
+      )
       return
     }
-
     const errorMessage = error?.message ?? t('common.wrong')
-
-    updateChat(uuid, index, {
-      dateTime: new Date().toLocaleString(),
-      text: errorMessage,
-      inversion: false,
-      error: true,
-      loading: false,
-      conversationOptions: null,
-      requestOptions: { prompt: message, ...options },
-    })
-  } finally {
+    updateChat(
+      uuid,
+      index,
+      {
+        dateTime: new Date().toLocaleString(),
+        text: errorMessage,
+        inversion: false,
+        error: true,
+        loading: false,
+        conversationOptions: null,
+        requestOptions: { prompt: message, ...options },
+      },
+    )
+  }
+  finally {
     loading.value = false
   }
 }
@@ -377,7 +356,7 @@ function handleEnter(event: KeyboardEvent) {
 }
 
 // TODO 展示Prompt选择框
-function handlePrompt() {}
+function handlePrompt() { }
 
 // 允许/禁止回车发送消息
 function changeEnterSend() {
@@ -432,30 +411,19 @@ onUnmounted(() => {
       </div>
 
       <div class="self-center">
-        <button
-          v-if="theme === 'light'"
-          @click="changeTheme('dark')"
-          type="button"
-          class="inline-flex items-center rounded-full border border-transparent bg-black p-2 text-white shadow-sm"
-        >
+        <button v-if="theme === 'light'" @click="changeTheme('dark')" type="button"
+          class="inline-flex items-center rounded-full border border-transparent bg-black p-2 text-white shadow-sm">
           <MoonIcon class="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <button
-          v-else
-          @click="changeTheme('light')"
-          type="button"
-          class="inline-flex items-center rounded-full border border-transparent bg-white p-2 text-black shadow-sm"
-        >
+        <button v-else @click="changeTheme('light')" type="button"
+          class="inline-flex items-center rounded-full border border-transparent bg-white p-2 text-black shadow-sm">
           <SunIcon class="h-5 w-5" aria-hidden="true"></SunIcon>
         </button>
 
         <el-tooltip content="清空聊天记录" placement="bottom" effect="light">
-          <button
-            @click="handleClear"
-            type="button"
-            class="ml-2 inline-flex items-center rounded-full border border-transparent bg-red-600 p-2 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
+          <button @click="handleClear" type="button"
+            class="ml-2 inline-flex items-center rounded-full border border-transparent bg-red-600 p-2 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <ArchiveBoxXMarkIcon class="h-5 w-5" aria-hidden="true" />
           </button>
         </el-tooltip>
@@ -466,20 +434,11 @@ onUnmounted(() => {
   <div id="scrollRef" ref="scrollRef" class="flex-grow overflow-y-scroll">
     <div class="grid grid-cols-12 gap-y-2">
       <template v-for="(item, index) of dataSources" :key="index">
-        <RightMessage
-          v-if="item.inversion"
-          :id="index.toString()"
-          :content="item.text"
-          :avatar-url="userStore.userInfo.avatar"
-        ></RightMessage>
+        <RightMessage v-if="item.inversion" :id="index.toString()" :content="item.text"
+          :avatar-url="userStore.userInfo.avatar"></RightMessage>
 
-        <LeftMessage
-          v-else
-          :id="index.toString()"
-          :content="item.text"
-          :inversion="item.inversion"
-          :error="item.error"
-        ></LeftMessage>
+        <LeftMessage v-else :id="index.toString()" :content="item.text" :inversion="item.inversion" :error="item.error">
+        </LeftMessage>
       </template>
     </div>
   </div>
@@ -487,21 +446,12 @@ onUnmounted(() => {
   <div class="flex-shrink-0">
     <!-- stop button -->
     <div v-if="loading" class="flex justify-center">
-      <button
-        @click="handleStop"
-        class="flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-      >
-        <svg
-          class="animate-spin w-5 h-5 mx-1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
+      <button @click="handleStop"
+        class="flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+        <svg class="animate-spin w-5 h-5 mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
             d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-            clip-rule="evenodd"
-          />
+            clip-rule="evenodd" />
         </svg>
         <span class="mx-1">{{ $t('chat.StopResponding') }}</span>
       </button>
@@ -510,92 +460,47 @@ onUnmounted(() => {
     <div class="lg:inset-x-64 lg:-right-0 inset-x-0">
       <div class="relative flex items-center my-5 mx-5">
         <!-- 是否允许回车发送 -->
-        <el-tooltip
-          v-if="!isMobile"
-          :content="!enterSend ? '允许回车发送' : '禁止回车发送'"
-          placement="bottom"
-          effect="light"
-        >
-          <div
-            class="absolute right-28 focus:outline-none rtl:left-0 rtl:right-auto"
-          >
-            <ChevronUpIcon
-              class="w-6 h-6 mx-4"
-              @click="changeEnterSend"
-              :class="[
-                !enterSend
-                  ? 'text-gray-400 dark:text-gray-500'
-                  : 'text-gray-700 dark:text-gray-100',
-              ]"
-            ></ChevronUpIcon>
+        <el-tooltip v-if="!isMobile" :content="!enterSend ? '允许回车发送' : '禁止回车发送'" placement="bottom" effect="light">
+          <div class="absolute right-28 focus:outline-none rtl:left-0 rtl:right-auto">
+            <ChevronUpIcon class="w-6 h-6 mx-4" @click="changeEnterSend" :class="[
+              !enterSend
+                ? 'text-gray-400 dark:text-gray-500'
+                : 'text-gray-700 dark:text-gray-100',
+            ]"></ChevronUpIcon>
           </div>
         </el-tooltip>
 
         <!-- Promtp提示 -->
-        <el-tooltip
-          v-if="!isMobile"
-          content="选择Prompt"
-          placement="bottom"
-          effect="light"
-        >
-          <div
-            class="absolute right-20 focus:outline-none rtl:left-0 rtl:right-auto"
-          >
-            <PlusCircleIcon
-              @click="handlePrompt"
-              class="w-6 h-6 mx-4 text-gray-700 dark:text-gray-100"
-            ></PlusCircleIcon>
+        <el-tooltip v-if="!isMobile" content="选择Prompt" placement="bottom" effect="light">
+          <div class="absolute right-20 focus:outline-none rtl:left-0 rtl:right-auto">
+            <PlusCircleIcon @click="handlePrompt" class="w-6 h-6 mx-4 text-gray-700 dark:text-gray-100"></PlusCircleIcon>
           </div>
         </el-tooltip>
 
         <!-- 是否需要携带聊天历史信息 -->
-        <el-tooltip
-          v-if="!isMobile"
-          :content="!usingContext ? '使用连续对话模式' : '关闭连续对话模式'"
-          placement="bottom"
-          effect="light"
-        >
-          <div
-            class="absolute right-12 focus:outline-none rtl:left-0 rtl:right-auto"
-          >
-            <ClockIcon
-              class="w-6 h-6 mx-4"
-              @click="toggleUsingContext"
-              :class="[
-                !usingContext
-                  ? 'text-gray-400 dark:text-gray-500'
-                  : 'text-gray-700 dark:text-gray-100',
-              ]"
-            ></ClockIcon>
+        <el-tooltip v-if="!isMobile" :content="!usingContext ? '使用连续对话模式' : '关闭连续对话模式'" placement="bottom" effect="light">
+          <div class="absolute right-12 focus:outline-none rtl:left-0 rtl:right-auto">
+            <ClockIcon class="w-6 h-6 mx-4" @click="toggleUsingContext" :class="[
+              !usingContext
+                ? 'text-gray-400 dark:text-gray-500'
+                : 'text-gray-700 dark:text-gray-100',
+            ]"></ClockIcon>
           </div>
         </el-tooltip>
 
         <!-- 发送消息 -->
-        <button
-          :disabled="buttonDisabled"
-          @click="handleSubmit"
-          type="submit"
-          class="border-l border-gray-300 absolute right-0 focus:outline-none rtl:left-0 rtl:right-auto"
-        >
-          <PaperAirplaneIcon
-            class="w-6 h-6 mx-4 transition-colors duration-300"
-            :class="[
-              buttonDisabled
-                ? 'text-gray-400 dark:text-gray-500'
-                : 'text-gray-700 dark:text-gray-100',
-            ]"
-            aria-hidden="true"
-          ></PaperAirplaneIcon>
+        <button :disabled="buttonDisabled" @click="handleSubmit" type="submit"
+          class="border-l border-gray-300 absolute right-0 focus:outline-none rtl:left-0 rtl:right-auto">
+          <PaperAirplaneIcon class="w-6 h-6 mx-4 transition-colors duration-300" :class="[
+            buttonDisabled
+              ? 'text-gray-400 dark:text-gray-500'
+              : 'text-gray-700 dark:text-gray-100',
+          ]" aria-hidden="true"></PaperAirplaneIcon>
         </button>
 
         <!-- 输入框 -->
-        <input
-          ref="inputRef"
-          v-model="prompt"
-          @keypress="handleEnter"
-          type="text"
-          class="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 border rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 dark:bg-[#161618] dark:text-gray-300 dark:border-[#10b982]"
-        />
+        <input ref="inputRef" v-model="prompt" @keypress="handleEnter" type="text"
+          class="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 border rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 dark:bg-[#161618] dark:text-gray-300 dark:border-[#10b982]" />
       </div>
     </div>
   </div>

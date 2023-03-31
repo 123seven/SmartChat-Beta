@@ -64,6 +64,11 @@ export default {
     members: '團隊',
     apps: '應用',
     upgrade: '升級',
+    signin:'登錄',
+    signup:'註冊',
+    signout:'退出',
+    haveAccount:'已有帳戶？點擊去登錄',
+    dontHaveAccount :'還沒有賬戶？點擊去註冊',
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

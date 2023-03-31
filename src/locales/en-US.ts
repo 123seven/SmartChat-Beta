@@ -65,6 +65,11 @@ export default {
     members: 'Members',
     apps: 'Apps',
     upgrade: 'Upgrade',
+    signin: 'Sign In',
+    signup: 'Sign UP',
+    signout: 'Sign Out',
+    haveAccount: 'Already have an account?',
+    dontHaveAccount: 'Don’t have an account yet? Sign up',
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

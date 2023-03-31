@@ -1,112 +1,112 @@
 <script lang="ts" setup>
-import { fetchSignUp } from '@/api'
-import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { fetchSignUp } from "@/api";
+import { useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
+import { t } from "@/locales";
 
-const router = useRouter()
+const router = useRouter();
 
 const SignUpData = {
-  username: '',
-  email: 'user@example.com',
-  password: '1qaz2wsx#EDC',
-  passwordRepeat: '1qaz2wsx#EDC',
-}
+  username: "",
+  email: "",
+  password: "",
+  passwordRepeat: "",
+};
 
 interface SignUpResponse {
-  id: string
-  avatar_url: string
-  email: string
-  token: string
-  username: string
+  id: string;
+  avatar_url: string;
+  email: string;
+  token: string;
+  username: string;
 }
 // 大小写字母、数字、下划线和连接符号。长度3-16.
 function validateUsername() {
-  const regex = /^[a-zA-Z0-9_-]{3,16}$/
-  return regex.test(SignUpData.username)
+  const regex = /^[a-zA-Z0-9_-]{3,16}$/;
+  return regex.test(SignUpData.username);
 }
 // 邮箱格式有效性验证
 function validateEmail() {
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-  console.log('email', SignUpData.email)
-  return regex.test(SignUpData.email)
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  console.log("email", SignUpData.email);
+  return regex.test(SignUpData.email);
 }
 // 检查密码长度是否大于8
 function validatePassword() {
-  return SignUpData.password.length > 8
+  return SignUpData.password.length > 8;
 }
 // 两个密码输入是否一致
 function passwordsMatch() {
-  return SignUpData.password === SignUpData.passwordRepeat
+  return SignUpData.password === SignUpData.passwordRepeat;
 }
 
 async function SignUp() {
   try {
     if (!validateUsername()) {
       ElMessage({
-        type: 'error',
-        message: '用户名无效',
-      })
-      return
+        type: "error",
+        message: "用户名无效",
+      });
+      return;
     }
 
     if (!validateEmail()) {
       ElMessage({
-        type: 'error',
-        message: '邮箱无效',
-      })
-      return
+        type: "error",
+        message: "邮箱无效",
+      });
+      return;
     }
 
     if (!validatePassword()) {
       ElMessage({
-        type: 'error',
-        message: '密码必须大于8位字符',
-      })
-      return
+        type: "error",
+        message: "密码必须大于8位字符",
+      });
+      return;
     }
 
     if (!passwordsMatch()) {
       ElMessage({
-        type: 'error',
-        message: '两次输入密码不一致',
-      })
-      return
+        type: "error",
+        message: "两次输入密码不一致",
+      });
+      return;
     }
 
     const { data } = await fetchSignUp<SignUpResponse>(
       SignUpData.username,
       SignUpData.email,
       SignUpData.password
-    )
+    );
     ElMessage({
-      type: 'success',
-      message: '注册成功，3秒后将自动跳转到登录页面',
-    })
+      type: "success",
+      message: "注册成功，3秒后将自动跳转到登录页面",
+    });
     setTimeout(() => {
-      router.push('/signin')
-    }, 3000)
+      router.push("/signin");
+    }, 3000);
   } catch (error: any) {
-    console.log('SignUp Error', error)
+    console.log("SignUp Error", error);
     ElMessage({
-      type: 'error',
+      type: "error",
       message: error.message,
-    })
+    });
   }
 }
 </script>
 
 <template>
   <section class="bg-white dark:bg-gray-900">
-    <div
-      class="container flex items-center justify-center min-h-screen px-6 mx-auto"
-    >
+    <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
       <div class="w-full max-w-md">
         <div class="flex justify-center mx-auto">
-          <img
-            class="w-auto h-7 sm:h-8"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
-          />
+          <div class="flex flex-shrink-0 items-center">
+            <span class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+              {{ $t('common.productName') }}
+            </span>
+            <span class="bg-[#9750dd] text-white rounded ml-1 px-1 text-sm font-bold leading-none">BETA</span>
+          </div>
         </div>
 
         <div class="flex items-center justify-center mt-6">
@@ -114,7 +114,7 @@ async function SignUp() {
             href="#"
             class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
           >
-            sign up
+            {{ t('common.signup') }}
           </a>
         </div>
 
@@ -227,7 +227,7 @@ async function SignUp() {
             @click="SignUp"
             class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
           >
-            Sign Up
+            {{ t('common.signup') }}
           </button>
 
           <div class="mt-6 text-center">
@@ -236,7 +236,7 @@ async function SignUp() {
               href="#"
               class="text-sm text-blue-500 hover:underline dark:text-blue-400"
             >
-              Already have an account?
+              {{ t('common.haveAccount') }}
             </router-link>
           </div>
         </div>

@@ -67,6 +67,11 @@ export default {
     members: '团队',
     apps: '应用',
     upgrade: '升级',
+    signin: '登录',
+    signup: '注册',
+    signout: '退出登录',
+    haveAccount: '已有帐户？点击去登录',
+    dontHaveAccount: '还没有账户？点击去注册',
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
