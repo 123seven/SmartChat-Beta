@@ -20,6 +20,8 @@ const props = defineProps<Props>()
 
 const { isMobile } = useBasicLayout()
 
+console.log("isMobile",isMobile)
+
 const textRef = ref<HTMLElement>()
 
 const mdi = new MarkdownIt({
@@ -65,7 +67,7 @@ const text = computed(() => {
 function highlightBlock(str: string, lang?: string) {
   return `<pre class="code-block-wrapper"><div class="code-block-header"><span class="code-block-header__lang">${lang}</span><span class="code-block-header__copy">${t(
     'chat.copyCode'
-  )}</span></div><code class="max-w-xl hljs code-block-body ${lang}">${str}</code></pre>`
+  )}</span></div><code class="max-w-xl md:max-w-sm hljs code-block-body ${lang}">${str}</code></pre>`
 }
 
 defineExpose({ textRef })

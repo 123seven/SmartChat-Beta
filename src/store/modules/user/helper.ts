@@ -19,8 +19,8 @@ export function defaultSetting(): UserState {
   return {
     userInfo: {
       id: '',
-      avatar: 'https://files.catbox.moe/tyr8zm.png',
-      username: 'Steven Zhu',
+      avatar: 'https://i2.100024.xyz/2023/04/01/kbe6yb.webp',
+      username: '游客',
       email: '',
       auth: false,
       token: '',

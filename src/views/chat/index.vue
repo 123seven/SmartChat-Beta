@@ -401,7 +401,12 @@ onUnmounted(() => {
     <div class="flex flex-row justify-between px-4 py-5 sm:px-6">
       <div>
         <h3 class="text-base font-semibold leading-6 dark:text-gray-200">
-          {{ currentChatHistory?.title ?? 'New Chat' }}
+          {{
+            currentChatHistory?.title ? (
+            currentChatHistory.title.length > 16 ? currentChatHistory.title.slice(0, 16) +
+              '...' : currentChatHistory.title
+          ) : 'New Chat'
+          }}
         </h3>
 
         <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">

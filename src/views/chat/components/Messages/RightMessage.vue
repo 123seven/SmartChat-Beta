@@ -14,6 +14,7 @@ const props = defineProps<Props>();
       <img
         class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
         :src="props.avatarUrl"
+        onerror="https://i2.100024.xyz/2023/04/01/kbe6yb.webp"
         alt="avatar"
       />
       <div class="relative mr-3 text-sm dark:bg-[#a1dc95] dark:text-black py-2 px-4 shadow rounded-xl">

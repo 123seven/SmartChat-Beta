@@ -22,8 +22,6 @@ const dataSources = computed(() => chatStore.history)
 
 const showDeleteIndex = ref<number>()
 
-console.log('route', route)
-console.log('path', route.path)
 // 导航栏
 const navigation = computed(() => {
   const navigation = [
@@ -286,7 +284,6 @@ const bgColorList = [
       <el-tooltip content="退出登录" placement="bottom">
         <div
           @click="handleSignOut"
-          href="#"
           class="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
         >
           <svg
