@@ -70,6 +70,9 @@ export default {
     signout: 'Sign Out',
     haveAccount: 'Already have an account?',
     dontHaveAccount: 'Don’t have an account yet? Sign up',
+    pricingPlans: 'Pricing Plans',
+    included: "What's included",
+    select: "Buy"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

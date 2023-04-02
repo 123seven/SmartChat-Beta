@@ -69,6 +69,9 @@ export default {
     signout:'退出',
     haveAccount:'已有帳戶？點擊去登錄',
     dontHaveAccount :'還沒有賬戶？點擊去註冊',
+    pricingPlans: '定價計劃',
+    included: '包含',
+    select: "包含"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

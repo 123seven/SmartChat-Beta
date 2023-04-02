@@ -9,7 +9,7 @@
         <img
           class="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400"
           alt=""
-          src="https://files.catbox.moe/ozmttj.jpeg"
+          src="https://i2.100024.xyz/2023/04/01/kbe6yb.webp"
         />
       </div>
 

@@ -60,6 +60,10 @@ async function SignIn() {
     }
     userStore.updateUserInfo({ ...data, avatar: data.avatar_url });
     userStore.setUserAuth();
+    ElMessage({
+      type: "success",
+      message: "登录成功",
+    });
     router.push("/");
   } catch (error: any) {
     console.log("SignIn Error", error);
