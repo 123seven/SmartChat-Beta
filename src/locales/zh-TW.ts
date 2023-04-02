@@ -20,6 +20,7 @@ export default {
     no: '否',
     confirm: '確認',
     download: '下載',
+    username: '用戶名',
     noData: '目前無資料',
     wrong: '發生錯誤，請稍後再試。',
     success: '操作成功',
@@ -27,9 +28,10 @@ export default {
     verify: '驗證',
     unauthorizedTips: '未經授權，請先進行驗證。',
     productName: 'OpenChat',
+    userSettings: '用戶設定',
     gptSettings: 'GPT設定',
     gptSettingsDesc: '設置您的OpenAI API Key開始使用',
-    photo: '頭像',
+    avatar: '頭像',
     change: '更換',
     name: '名稱',
     apiKey: 'API KEY',
@@ -71,7 +73,8 @@ export default {
     dontHaveAccount :'還沒有賬戶？點擊去註冊',
     pricingPlans: '定價計劃',
     included: '包含',
-    select: "包含"
+    select: "選擇",
+    email: "郵箱"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

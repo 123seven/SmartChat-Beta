@@ -20,6 +20,7 @@ export default {
     no: 'No',
     confirm: 'Confirm',
     download: 'Download',
+    username: "Username",
     noData: 'No Data',
     wrong: 'Something went wrong, please try again later.',
     success: 'Success',
@@ -72,7 +73,8 @@ export default {
     dontHaveAccount: 'Don’t have an account yet? Sign up',
     pricingPlans: 'Pricing Plans',
     included: "What's included",
-    select: "Buy"
+    select: 'Buy',
+    email: 'Email'
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

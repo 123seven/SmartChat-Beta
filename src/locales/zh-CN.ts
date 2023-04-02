@@ -74,7 +74,8 @@ export default {
     dontHaveAccount: '还没有账户？点击去注册',
     pricingPlans: '定价计划',
     included: "包含",
-    select: "选择"
+    select: "选择",
+    email: "邮箱"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
