@@ -74,7 +74,12 @@ export default {
     pricingPlans: '定價計劃',
     included: '包含',
     select: "選擇",
-    email: "郵箱"
+    email: "郵箱",
+    usingContext: "使用歷史消息",
+    contextCount: "攜帶歷史消息數",
+    temperature: "回复隨機性",
+    presencePenalty: "話題新鮮度",
+    frequencyPenalty: "對話可理解性",
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

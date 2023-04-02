@@ -74,20 +74,10 @@ export function fetchUserSettings<T>() {
   })
 }
 
-export function saveUserSettings<T>(
-  avatar?: string,
-  username?: string,
-  apiKey?: string,
-  modelId?: number
-) {
+export function saveUserSettings<T>(settings: any) {
   return post<T>({
     url: '/api/v1/user/settings',
-    data: {
-      avatar: avatar,
-      username: username,
-      apiKey: apiKey,
-      modelId: modelId,
-    },
+    data: settings
   })
 }
 

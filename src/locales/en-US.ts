@@ -74,7 +74,12 @@ export default {
     pricingPlans: 'Pricing Plans',
     included: "What's included",
     select: 'Buy',
-    email: 'Email'
+    email: 'Email',
+    usingContext: "Using context",
+    contextCount: "Using context count",
+    temperature: "Temperature",
+    presencePenalty: "Presence penalty",
+    frequencyPenalty: "Frequency penalty",
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',
