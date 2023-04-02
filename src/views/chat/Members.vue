@@ -20,7 +20,7 @@
       </h2>
 
       <p class="mt-2 text-sm text-gray-600 dark:text-gray-200">
-        抱歉，这个功能正在加紧开发中，敬请期待！
+        抱歉，这个功能现仅允许内侧用户使用！
       </p>
 
       <div class="flex justify-end mt-4">
