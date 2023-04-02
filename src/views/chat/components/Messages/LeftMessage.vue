@@ -51,9 +51,6 @@ const wrapClass = computed(() => {
     'min-w-[20px]',
     'rounded-md',
     isMobile.value ? 'p-2' : 'px-3 py-2',
-    props.inversion ? 'bg-[#d2f9d1]' : 'bg-[#f4f6f8]',
-    props.inversion ? 'dark:bg-[#a1dc95]' : 'dark:bg-[#1e1e20]',
-    props.inversion ? 'message-request' : 'message-reply',
     { 'text-red-500': props.error },
   ]
 })
@@ -67,7 +64,7 @@ const text = computed(() => {
 function highlightBlock(str: string, lang?: string) {
   return `<pre class="code-block-wrapper"><div class="code-block-header"><span class="code-block-header__lang">${lang}</span><span class="code-block-header__copy">${t(
     'chat.copyCode'
-  )}</span></div><code class="max-w-xl md:max-w-sm hljs code-block-body ${lang}">${str}</code></pre>`
+  )}</span></div><code class="hljs code-block-body ${lang}">${str}</code></pre>`
 }
 
 defineExpose({ textRef })
@@ -75,7 +72,7 @@ defineExpose({ textRef })
 
 <template>
   <div
-    class="col-start-1 col-end-11 p-3 sm:col-start-1 sm:col-end-8 rounded-lg"
+    class="col-start-1 col-end-12 p-3 sm:col-start-1 sm:col-end-8 rounded-lg"
   >
     <div class="flex items-center">
       <div class="flex items-center justify-center rounded-full flex-shrink-0">
@@ -91,7 +88,7 @@ defineExpose({ textRef })
         </svg>
       </div>
 
-      <div class="ml-3">
+      <div :class="wrapClass">
         <div
           ref="textRef"
           class="text-sm rounded-xl shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:text-white transition cursor-copy borde py-2 px-4"

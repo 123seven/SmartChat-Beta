@@ -9,7 +9,7 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <div class="col-start-6 col-end-13 p-3 sm:col-start-6 sm:col-end-13 rounded-lg">
+  <div class="col-start-3 col-end-13 p-3 sm:col-start-6 sm:col-end-13 rounded-lg">
     <div class="flex justify-start flex-row-reverse items-center mx-auto">
       <img
         class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
