@@ -1,6 +1,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import {
   Dialog,
   DialogPanel,
@@ -22,8 +23,9 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
-import { useUserStore, useChatStore, useAuthStore } from '@/store'
+import { useUserStore, useAuthStore } from '@/store'
 
+const route = useRoute()
 const userStore = useUserStore()
 const authStore = useAuthStore()
 
@@ -62,11 +64,6 @@ const navigation = computed(() => {
   if (userStore.userInfo.auth) {
     navigation.push(
       {
-        name: 'settings',
-        href: '/chat/settings',
-        pathName: 'Settings',
-      },
-      {
         name: 'upgrade',
         href: '/chat/upgrade',
         pathName: 'Upgrade',
@@ -79,7 +76,7 @@ const navigation = computed(() => {
       {
         name: 'apps',
         href: '/chat/apps',
-        pathName: 'Spps',
+        pathName: 'Apps',
       }
     )
   }
@@ -133,8 +130,13 @@ function handleSignOut() {
 
               <!-- 导航栏 -->
               <router-link v-for="item in navigation" :key="item.name" :to="item.href"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50  dark:text-white">{{
-                  $t(`common.${item.name}`) }}
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100  dark:text-white dark:hover:bg-gray-800"
+                :class="[
+                  route.name === item.pathName
+                    ? 'bg-gray-100 dark:bg-gray-800'
+                    : '',
+                ]">{{$t(`common.${item.name}`) }}
+
               </router-link>
 
             </div>

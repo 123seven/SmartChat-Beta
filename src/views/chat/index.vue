@@ -404,11 +404,6 @@ function changeTheme(theme: Theme) {
   appStore.setTheme(theme)
 }
 
-// 关闭移动端侧边栏
-function mobileMenuClose() {
-  mobileMenuOpen.value = false
-}
-
 onMounted(() => {
   scrollToBottom()
   if (inputRef.value) inputRef.value?.focus()
@@ -420,7 +415,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-
   <!-- title -->
   <div class="flex-shrink-0">
     <div class="flex flex-row justify-between px-4 py-5 sm:px-6">

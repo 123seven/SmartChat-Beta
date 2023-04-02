@@ -58,7 +58,7 @@ const navigation = computed(() => {
         name: 'apps',
         icon: SquaresPlusIcon,
         href: '/chat/apps',
-        pathName: 'Spps',
+        pathName: 'Apps',
       }
     )
   }
