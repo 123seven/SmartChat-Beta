@@ -21,7 +21,7 @@ export function fetchChatConfig<T = any>() {
 
 export function fetchChatAPIProcess<T = any>(params: {
   prompt: string
-  options?: { cid?: string|null; usingContext?: boolean|null }
+  options?: { cid?: string | null; usingContext?: boolean | null }
   signal?: GenericAbortSignal
   onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void
 }) {
@@ -88,5 +88,12 @@ export function saveUserSettings<T>(
       apiKey: apiKey,
       modelId: modelId,
     },
+  })
+}
+
+
+export function fetchPricingPlan<T>() {
+  return get<T>({
+    url: '/api/v1/pricing/plans',
   })
 }

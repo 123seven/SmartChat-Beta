@@ -1,421 +1,146 @@
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+import { CheckIcon } from '@heroicons/vue/20/solid'
+
+import { fetchPricingPlan } from '@/api'
+import { da } from 'element-plus/es/locale'
+
+
+interface Feature {
+  zh: Array<string>
+}
+
+interface Plan {
+  id: number,
+  zh_name: string,
+  list_price: number,
+  price: number
+  zh_desc: string,
+  features: Feature
+}
+
+interface PlanResponse {
+  billing: Array<string>;
+  按月计费: Array<Plan>;
+  按年计费: Array<Plan>;
+}
+
+const pricingPlans = ref<PlanResponse>()
+const activePlans = ref<Array<Plan>>()
+const active = ref<string>('')
+
+// 获取定价计划
+async function fetchData() {
+  try {
+    const { data } = await fetchPricingPlan<PlanResponse>()
+
+    active.value = data.billing[0]
+    pricingPlans.value = data
+    activePlans.value = data[data.billing[0]]
+
+  } catch (error) {
+    //
+  }
+}
+
+
+const tiers = [
+  {
+    name: 'Free',
+    href: '#',
+    priceMonthly: 12,
+    description: 'All the basics for starting a new business',
+    includedFeatures: ['Potenti felis, in cras at at ligula nunc.', 'Orci neque eget pellentesque.'],
+  },
+  {
+    name: 'Freelancer',
+    href: '#',
+    priceMonthly: 24,
+    description: 'All the basics for starting a new business',
+    includedFeatures: [
+      'Potenti felis, in cras at at ligula nunc. ',
+      'Orci neque eget pellentesque.',
+      'Donec mauris sit in eu tincidunt etiam.',
+    ],
+  },
+  {
+    name: 'Startup',
+    href: '#',
+    priceMonthly: 32,
+    description: 'All the basics for starting a new business',
+    includedFeatures: [
+      'Potenti felis, in cras at at ligula nunc. ',
+      'Orci neque eget pellentesque.',
+      'Donec mauris sit in eu tincidunt etiam.',
+      'Faucibus volutpat magna.',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    href: '#',
+    priceMonthly: 48,
+    description: 'All the basics for starting a new business',
+    includedFeatures: [
+      'Potenti felis, in cras at at ligula nunc. ',
+      'Orci neque eget pellentesque.',
+      'Donec mauris sit in eu tincidunt etiam.',
+      'Faucibus volutpat magna.',
+      'Id sed tellus in varius quisque.',
+      'Risus egestas faucibus.',
+      'Risus cursus ullamcorper.',
+    ],
+  },
+]
+
+function changeActive(billing: string) {
+  active.value = billing
+  activePlans.value = pricingPlans.value[billing]
+}
+onMounted(() => {
+  fetchData();
+});
+</script>
+
+
 <template>
-  <div class="px-6 py-2 mx-auto">
-    <div
-      class="max-w-2xl p-1.5 mx-auto overflow-hidden bg-gray-100 rounded-lg dark:bg-[#252529]"
-    >
-      <div class="grid gap-3 md:grid-cols-3">
-        <button
-          class="px-3 py-2 font-medium text-gray-800 uppercase transition-colors duration-300 transform bg-transparent rounded-lg focus:outline-none dark:text-gray-200 dark:hover:bg-gray-600 hover:bg-gray-200"
-        >
-          每月
-        </button>
-
-        <button
-          class="flex items-center justify-center px-3 py-2 font-medium text-gray-800 uppercase transition-colors duration-300 transform bg-gray-200 rounded-lg dark:bg-gray-700 focus:outline-none dark:text-gray-200"
-        >
-          <span class="mx-1">每季</span>
-          <span
-            class="text-xs mx-1 font-normal text-white bg-blue-500 rounded-full py-0.5 px-1.5"
-            >优惠 10%</span
-          >
-        </button>
-
-        <button
-          class="flex items-center justify-center px-3 py-2 font-medium text-gray-800 uppercase transition-colors duration-300 transform bg-transparent rounded-lg focus:outline-none dark:text-gray-200 dark:hover:bg-gray-600 hover:bg-gray-200"
-        >
-          <span class="mx-1">每年</span>
-          <span
-            class="text-xs mx-1 font-normal text-white bg-blue-500 rounded-full py-0.5 px-1.5"
-            >优惠 20%</span
-          >
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="flex flex-col items-center justify-center  mt-16 space-y-3 md:items-end md:-mx-5 md:space-y-0 md:flex-row"
-    >
-      <div
-        class="w-full px-6 py-4 transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
-      >
-        <div class="text-center">
-          <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-            Basic
-          </p>
-          <p class="mt-4 text-gray-500 dark:text-gray-300">基本功能</p>
-          <h4 class="mt-2 text-gray-600 line-through dark:text-gray-400">
-            ¥9.99
-          </h4>
-          <h4
-            class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100"
-          >
-            ¥0.00
-          </h4>
-          <p class="mt-4 text-gray-500 dark:text-gray-300">每季</p>
-          <p class="mt-4 text-gray-500 dark:text-gray-300">Bill all 6 months</p>
-        </div>
-
-        <div class="mt-8 space-y-8">
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-blue-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            <span class="mx-4 text-gray-700 dark:text-gray-300"
-              >访问部分功能</span
-            >
-          </div>
-
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-blue-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span class="mx-4 text-gray-700 dark:text-gray-300">15次/天</span>
-          </div>
-
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-blue-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            <span class="mx-4 text-gray-700 dark:text-gray-300"
-              >提示词支持</span
-            >
-          </div>
-
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-blue-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            <span class="mx-4 text-gray-700 dark:text-gray-300"
-              >对话历史</span
-            >
-          </div>
-
-          <div class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-blue-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            <span class="mx-4 text-gray-700 dark:text-gray-300"
-              >个人APIKEY</span
-            >
-          </div>
-        </div>
-
-        <button
-          class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-300 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-        >
-          当前选择
-        </button>
-      </div>
-
-      <div
-        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
-      >
-        <p class="py-2 text-sm text-center text-white uppercase bg-blue-500">
-          专家推荐
-        </p>
-        <div class="px-6 py-4">
-          <div class="text-center">
-            <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-              Pro
-            </p>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">
-              高级功能
-            </p>
-            <h4 class="mt-2 text-gray-600 line-through dark:text-gray-400">
-              ¥408.00
-            </h4>
-            <h4
-              class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100"
-            >
-              ¥59.99
-            </h4>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">每季</p>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">
-              Bill all 6 months
-            </p>
-          </div>
-
-          <div class="mt-8 space-y-8">
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >访问全部功能</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >100次/天</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >提示词支持</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >对话历史</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >AI应用</span
-              >
-            </div>
-          </div>
-
-          <button
-            class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            选择 Pro
+  <div class="bg-white">
+    <div class="mx-auto max-w-7xl py-4 px-6 lg:px-8">
+      <div class="sm:align-center sm:flex sm:flex-col">
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-center">{{ $t('common.pricingPlans') }}</h1>
+        <!-- <p class="mt-5 text-xl text-gray-500 sm:text-center">Start building for free, then add a site plan to go live. Account plans unlock additional features.</p> -->
+        <div class="relative mt-6 flex self-center rounded-lg bg-gray-100 p-0.5 sm:mt-8">
+          <button v-for="item in pricingPlans?.billing" :key="item" @click="changeActive(item)"
+            :class="active == item ? 'border-gray-200 bg-white shadow-sm' : 'border border-transparent'"
+            class="relative mr-0.5 w-1/2 whitespace-nowrap rounded-md  py-2 text-sm font-medium text-gray-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-auto sm:px-8"
+            type="button">
+            {{ item }}
           </button>
         </div>
       </div>
-
       <div
-        class="w-full overflow-hidden transition-colors duration-300 transform rounded-lg md:mx-5 md:w-80 bg-gray-50 dark:bg-[#252529]"
-      >
-        <div class="px-6 py-4">
-          <div class="text-center">
-            <p class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
-              Team
+        class="mt-12 space-y-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
+        <div v-for="plan in activePlans" :key="plan.zh_name"
+          class="divide-y divide-gray-200 rounded-lg border border-gray-200 shadow-sm">
+          <div class="p-6">
+            <h2 class="text-lg font-medium leading-6 text-gray-900">{{ plan.zh_name }}</h2>
+            <p class="mt-4 text-sm text-gray-500">{{ plan.zh_desc }}</p>
+            <p class="mt-8">
+              <span class="text-4xl font-bold tracking-tight text-gray-900">¥{{ plan.price }}</span>
+
             </p>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">
-              高级功能+企业定制功能
-            </p>
-            <h4 class="mt-2 text-gray-600 line-through dark:text-gray-400">
-              ¥12000.00
-            </h4>
-            <h4
-              class="mt-2 text-4xl font-semibold text-gray-800 dark:text-gray-100"
-            >
-              ¥3600.00
-            </h4>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">每季</p>
-            <p class="mt-4 text-gray-500 dark:text-gray-300">
-              Bill all 6 months
-            </p>
+            <a :href="plan.id"
+              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900">{{ $t('common.select') }}
+              </a>
           </div>
-
-          <div class="mt-8 space-y-8">
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >企业特殊定制功能</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >500次/天</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >团队账户</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >可供0～50人使用</span
-              >
-            </div>
-
-            <div class="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-blue-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-
-              <span class="mx-4 text-gray-700 dark:text-gray-300"
-                >AI应用</span
-              >
-            </div>
+          <div class="px-6 pt-6 pb-8">
+            <h3 class="text-sm font-medium text-gray-900">{{ $t('common.included') }}</h3>
+            <ul role="list" class="mt-6 space-y-4">
+              <li v-for="feature in plan.features.zh" :key="feature" class="flex space-x-3">
+                <CheckIcon class="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
+                <span class="text-sm text-gray-500">{{ feature }}</span>
+              </li>
+            </ul>
           </div>
-
-          <button
-            class="w-full px-4 py-2 mt-10 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-          >
-            选择 Team
-          </button>
         </div>
       </div>
     </div>
