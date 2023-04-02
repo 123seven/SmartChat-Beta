@@ -33,10 +33,9 @@ const active = ref<string>('')
 async function fetchData() {
   try {
     const { data } = await fetchPricingPlan<PlanResponse>()
-
     active.value = data.billing[0]
     pricingPlans.value = data
-    activePlans.value = data[data.billing[0]] // @ts-ignore
+    activePlans.value = data.按月计费
 
   } catch (error) {
     //
@@ -45,7 +44,15 @@ async function fetchData() {
 
 function changeActive(billing: string) {
   active.value = billing
-  activePlans.value = pricingPlans.value[billing] // @ts-ignore
+  if (!pricingPlans.value) {
+    return
+  }
+  if (billing === '按月计费') {
+    activePlans.value = pricingPlans.value.按月计费
+  } else {
+    activePlans.value = pricingPlans.value.按年计费
+  }
+
 }
 onMounted(() => {
   fetchData();
