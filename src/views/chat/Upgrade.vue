@@ -36,65 +36,16 @@ async function fetchData() {
 
     active.value = data.billing[0]
     pricingPlans.value = data
-    activePlans.value = data[data.billing[0]]
+    activePlans.value = data[data.billing[0]] // @ts-ignore
 
   } catch (error) {
     //
   }
 }
 
-
-const tiers = [
-  {
-    name: 'Free',
-    href: '#',
-    priceMonthly: 12,
-    description: 'All the basics for starting a new business',
-    includedFeatures: ['Potenti felis, in cras at at ligula nunc.', 'Orci neque eget pellentesque.'],
-  },
-  {
-    name: 'Freelancer',
-    href: '#',
-    priceMonthly: 24,
-    description: 'All the basics for starting a new business',
-    includedFeatures: [
-      'Potenti felis, in cras at at ligula nunc. ',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
-    ],
-  },
-  {
-    name: 'Startup',
-    href: '#',
-    priceMonthly: 32,
-    description: 'All the basics for starting a new business',
-    includedFeatures: [
-      'Potenti felis, in cras at at ligula nunc. ',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
-      'Faucibus volutpat magna.',
-    ],
-  },
-  {
-    name: 'Enterprise',
-    href: '#',
-    priceMonthly: 48,
-    description: 'All the basics for starting a new business',
-    includedFeatures: [
-      'Potenti felis, in cras at at ligula nunc. ',
-      'Orci neque eget pellentesque.',
-      'Donec mauris sit in eu tincidunt etiam.',
-      'Faucibus volutpat magna.',
-      'Id sed tellus in varius quisque.',
-      'Risus egestas faucibus.',
-      'Risus cursus ullamcorper.',
-    ],
-  },
-]
-
 function changeActive(billing: string) {
   active.value = billing
-  activePlans.value = pricingPlans.value[billing]
+  activePlans.value = pricingPlans.value[billing] // @ts-ignore
 }
 onMounted(() => {
   fetchData();
@@ -128,9 +79,10 @@ onMounted(() => {
               <span class="text-4xl font-bold tracking-tight ">¥{{ plan.price }}</span>
 
             </p>
-            <a :href="plan.id"
-              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900">{{ $t('common.select') }}
-              </a>
+            <div
+              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900">
+              {{ $t('common.select') }}
+            </div>
           </div>
           <div class="px-6 pt-6 pb-8">
             <h3 class="text-sm font-medium ">{{ $t('common.included') }}</h3>
