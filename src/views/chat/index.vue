@@ -10,6 +10,7 @@ import {
   ChevronUpIcon,
   ClockIcon,
   PlusCircleIcon,
+  Bars3Icon,
 } from '@heroicons/vue/24/outline'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
@@ -64,7 +65,23 @@ const currentChatHistory = computed(
 const prompt = ref<string>('')
 const inputRef = ref<Ref | null>(null)
 const loading = ref<boolean>(false)
-console.log('!isMobile', !isMobile)
+
+// Props
+interface Props {
+  mobileMenu?: boolean
+}
+const props = defineProps<Props>()
+
+// Emit
+interface Emit {
+  (ev: 'changeMenu'): void
+}
+const emit = defineEmits<Emit>()
+
+// emit 开启/关闭 移动端侧边栏
+function handleMobileMenuChange() {
+  emit('changeMenu')
+}
 
 // 添加PromptStore
 const promptStore = usePromptStore()
@@ -77,6 +94,7 @@ dataSources.value.forEach((item, index) => {
   if (item.loading) updateChatSome(uuid, index, { loading: false })
 })
 
+// 提交对话
 function handleSubmit() {
   onConversation()
 }
@@ -386,6 +404,11 @@ function changeTheme(theme: Theme) {
   appStore.setTheme(theme)
 }
 
+// 关闭移动端侧边栏
+function mobileMenuClose() {
+  mobileMenuOpen.value = false
+}
+
 onMounted(() => {
   scrollToBottom()
   if (inputRef.value) inputRef.value?.focus()
@@ -397,6 +420,8 @@ onUnmounted(() => {
 </script>
 
 <template>
+
+  <!-- title -->
   <div class="flex-shrink-0">
     <div class="flex flex-row justify-between px-4 py-5 sm:px-6">
       <div>
@@ -416,6 +441,7 @@ onUnmounted(() => {
       </div>
 
       <div class="self-center">
+        <!-- 主题修改 -->
         <button v-if="theme === 'light'" @click="changeTheme('dark')" type="button"
           class="inline-flex items-center rounded-full border border-transparent bg-black p-2 text-white shadow-sm">
           <MoonIcon class="h-5 w-5" aria-hidden="true" />
@@ -426,16 +452,24 @@ onUnmounted(() => {
           <SunIcon class="h-5 w-5" aria-hidden="true"></SunIcon>
         </button>
 
+        <!-- 清空聊天记录 -->
         <el-tooltip content="清空聊天记录" placement="bottom" effect="light">
           <button @click="handleClear" type="button"
             class="ml-2 inline-flex items-center rounded-full border border-transparent bg-red-600 p-2 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <ArchiveBoxXMarkIcon class="h-5 w-5" aria-hidden="true" />
           </button>
         </el-tooltip>
+
+        <!-- 手机展示侧边栏 -->
+        <button v-if="isMobile" @click="handleMobileMenuChange" type="button"
+          class="ml-2 inline-flex items-center rounded-full border border-transparent p-2 text-gray-700 shadow-sm dark:bg-[#161618]">
+          <Bars3Icon class="h-5 w-5" aria-hidden="true" />
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- messages -->
   <div id="scrollRef" ref="scrollRef" class="flex-grow overflow-y-scroll">
     <div class="grid grid-cols-12 gap-y-2">
       <template v-for="(item, index) of dataSources" :key="index">
@@ -483,7 +517,7 @@ onUnmounted(() => {
         </el-tooltip>
 
         <!-- 是否需要携带聊天历史信息 -->
-        <el-tooltip v-if="!isMobile" :content="!usingContext ? '使用连续对话模式' : '关闭连续对话模式'" placement="bottom" effect="light">
+        <el-tooltip :content="!usingContext ? '使用连续对话模式' : '关闭连续对话模式'" placement="bottom" effect="light">
           <div class="absolute right-12 focus:outline-none rtl:left-0 rtl:right-auto">
             <ClockIcon class="w-6 h-6 mx-4" @click="toggleUsingContext" :class="[
               !usingContext
