@@ -42,7 +42,7 @@ const selected = computed({
 
 <template>
   <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium text-gray-700">{{
+    <ListboxLabel class="block text-sm font-medium">{{
       t('setting.language')
     }}</ListboxLabel>
     <div class="relative mt-1">

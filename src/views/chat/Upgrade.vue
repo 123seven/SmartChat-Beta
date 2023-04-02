@@ -103,15 +103,15 @@ onMounted(() => {
 
 
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-[#252529] h-screen">
     <div class="mx-auto max-w-7xl py-4 px-6 lg:px-8">
       <div class="sm:align-center sm:flex sm:flex-col">
-        <h1 class="text-5xl font-bold tracking-tight text-gray-900 sm:text-center">{{ $t('common.pricingPlans') }}</h1>
+        <h1 class="text-5xl font-bold tracking-tight sm:text-center">{{ $t('common.pricingPlans') }}</h1>
         <!-- <p class="mt-5 text-xl text-gray-500 sm:text-center">Start building for free, then add a site plan to go live. Account plans unlock additional features.</p> -->
-        <div class="relative mt-6 flex self-center rounded-lg bg-gray-100 p-0.5 sm:mt-8">
+        <div class="relative mt-6 flex self-center rounded-lg bg-gray-100 p-0.5 sm:mt-8 dark:bg-[#161618]">
           <button v-for="item in pricingPlans?.billing" :key="item" @click="changeActive(item)"
-            :class="active == item ? 'border-gray-200 bg-white shadow-sm' : 'border border-transparent'"
-            class="relative mr-0.5 w-1/2 whitespace-nowrap rounded-md  py-2 text-sm font-medium text-gray-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-auto sm:px-8"
+            :class="active == item ? 'border-gray-200 bg-white shadow-sm dark:bg-[#252529]' : 'border border-transparent dark:bg-[#161618]'"
+            class="relative mr-0.5 w-1/2 whitespace-nowrap rounded-md  py-2 text-sm font-medium  focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-auto sm:px-8"
             type="button">
             {{ item }}
           </button>
@@ -120,12 +120,12 @@ onMounted(() => {
       <div
         class="mt-12 space-y-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
         <div v-for="plan in activePlans" :key="plan.zh_name"
-          class="divide-y divide-gray-200 rounded-lg border border-gray-200 shadow-sm">
+          class="divide-y divide-gray-200 rounded-lg border border-gray-200 shadow-sm dark:bg-[#161618]">
           <div class="p-6">
-            <h2 class="text-lg font-medium leading-6 text-gray-900">{{ plan.zh_name }}</h2>
+            <h2 class="text-lg font-medium leading-6 ">{{ plan.zh_name }}</h2>
             <p class="mt-4 text-sm text-gray-500">{{ plan.zh_desc }}</p>
             <p class="mt-8">
-              <span class="text-4xl font-bold tracking-tight text-gray-900">¥{{ plan.price }}</span>
+              <span class="text-4xl font-bold tracking-tight ">¥{{ plan.price }}</span>
 
             </p>
             <a :href="plan.id"
@@ -133,7 +133,7 @@ onMounted(() => {
               </a>
           </div>
           <div class="px-6 pt-6 pb-8">
-            <h3 class="text-sm font-medium text-gray-900">{{ $t('common.included') }}</h3>
+            <h3 class="text-sm font-medium ">{{ $t('common.included') }}</h3>
             <ul role="list" class="mt-6 space-y-4">
               <li v-for="feature in plan.features.zh" :key="feature" class="flex space-x-3">
                 <CheckIcon class="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
