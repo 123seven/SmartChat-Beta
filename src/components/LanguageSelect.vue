@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import {
   Listbox,
   ListboxButton,
@@ -26,6 +26,7 @@ const languages: Array<languageItem> = [
   { name: 'English', online: true, language: 'en-US' },
 ]
 
+
 const selected = computed({
   get: () =>
     languages.find((element) => element.language == appStore.language) ||
@@ -42,9 +43,9 @@ const selected = computed({
 
 <template>
   <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium">{{
-      t('setting.language')
-    }}</ListboxLabel>
+  <ListboxLabel class="block text-sm font-medium">{{
+    t('setting.language')
+  }}</ListboxLabel>
     <div class="relative mt-1">
       <ListboxButton
         class="relative w-1/2 cursor-default rounded-md border border-gray-300 bg-white dark:bg-[#252529] dark:text-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
@@ -64,10 +65,9 @@ const selected = computed({
         leave-to-class="opacity-0">
         <ListboxOptions
           class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-[#252529] dark:text-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-          <ListboxOption as="template" v-for="item in languages" :key="item.name" :value="item"
-            v-slot="{ active, selected }">
+          <ListboxOption as="template" v-for="item in languages" :key="item.name" :value="item">
             <li :class="[
-              active ? 'text-white bg-indigo-600' : 'text-gray-900',
+              selected == item ? 'text-white bg-indigo-600' : 'text-gray-900',
               'relative cursor-default select-none py-2 pl-3 pr-9 dark:bg-[#252529] dark:text-white',
             ]">
               <div class="flex items-center">
@@ -86,7 +86,7 @@ const selected = computed({
               </div>
 
               <span v-if="selected" :class="[
-                active ? 'text-white' : 'text-indigo-600',
+                selected == item ? 'text-white' : 'text-indigo-600',
                 'absolute inset-y-0 right-0 flex items-center pr-4',
               ]">
                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
