@@ -11,7 +11,7 @@ const appStore = useAppStore()
 
 
 interface Settings {
-  apiKey: string,
+  apiKey?: string,
   modelId: number,
   usingContext: boolean,
   contextCount: number,
