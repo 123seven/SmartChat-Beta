@@ -22,9 +22,19 @@ export const useAppStore = defineStore('app-store', {
         this.recordState()
       }
     },
-    
+
     setUseEnter() {
       this.useEnter = !this.useEnter
+      this.recordState()
+    },
+
+    setUsingContext(usingContext: boolean) {
+      this.usingContext = usingContext
+      this.recordState()
+    },
+
+    setModelId(modelId: number) {
+      this.modelId = modelId
       this.recordState()
     },
 

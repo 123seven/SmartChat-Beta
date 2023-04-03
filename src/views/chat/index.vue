@@ -55,9 +55,6 @@ const { usingContext, toggleUsingContext } = useUsingContext()
 const { uuid } = route.params as { uuid: string }
 
 const dataSources = computed(() => chatStore.getChatByUuid(uuid))
-const conversationList = computed(() =>
-  dataSources.value.filter((item) => !item.inversion && !item.error)
-)
 const currentChatHistory = computed(
   () => chatStore.getChatHistoryByCurrentActive
 )

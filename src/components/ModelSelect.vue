@@ -14,8 +14,6 @@ import { t } from '@/locales'
 
 const appStore = useAppStore()
 
-const { language } = useLanguage()
-
 const models = [
   { id: 1, name: 'GPT-4', online: false },
   { id: 2, name: 'GPT-4-0314', online: false },
@@ -28,16 +26,20 @@ const models = [
   { id: 9, name: 'CODE-DAVINCI-002', online: false },
 ]
 
-const selected = ref(models[4])
+interface Props {
+  modelId: number,
+}
+const props = defineProps<Props>()
+const selected = ref(models[props.modelId-1 || 4])
 
-function setModel(modelId: string | number) {
+function setModel(modelId:  number) {
   console.log('modelId', modelId)
-  // appStore.setLanguage(language)
+  appStore.setModelId(modelId)
 }
 </script>
 
 <template>
-  <Listbox as="div" v-model="selected">
+  <Listbox as="div" v-model="selected" @update:modelValue="value => setModel(value.id)">
     <ListboxLabel class="block text-sm font-medium">{{
       t('common.gptModel')
     }}</ListboxLabel>

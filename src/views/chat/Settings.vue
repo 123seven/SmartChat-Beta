@@ -12,7 +12,7 @@ interface Settings {
   avatar: string;
   username: string;
   email: string;
-  apiKey: string;
+  apiKey?: string;
   modelId: number;
   usingContext: boolean,
   contextCount: number,
@@ -26,7 +26,7 @@ const settings = ref<Settings>({
   avatar: "",
   username: "",
   email: "",
-  apiKey: "",
+  apiKey: undefined,
   modelId: 4,
   usingContext: true,
   contextCount: 5,

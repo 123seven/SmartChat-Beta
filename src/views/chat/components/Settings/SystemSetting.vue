@@ -30,7 +30,9 @@ const settings = ref<Settings>(props.settings)
 // 保存用户设置
 async function saveUserConfig() {
   try {
-    await saveUserSettings(settings);
+    settings.value.modelId = appStore.modelId
+    await saveUserSettings(settings.value);
+    appStore.setUsingContext(settings.value.usingContext)
     ElMessage({
       type: "success",
       message: "保存成功",
@@ -66,7 +68,7 @@ async function saveUserConfig() {
                   {{ t('common.contextCount') }}
                 </label>
                 <div class="mt-2 flex rounded-md">
-                  <input type="text" name="company-website" id="company-website" :value="settings.contextCount"
+                  <input type="text" name="company-website" id="company-website" v-model="settings.contextCount"
                     class="block w-1/5 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="" />
 
@@ -87,7 +89,7 @@ async function saveUserConfig() {
                   {{ t('common.temperature') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" :value="settings.temperature"
+                  <input type="text" v-model="settings.temperature"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
 
@@ -101,7 +103,7 @@ async function saveUserConfig() {
                   {{ t('common.presencePenalty') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" :value="settings.presencePenalty"
+                  <input type="text" v-model="settings.presencePenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
 
@@ -113,7 +115,7 @@ async function saveUserConfig() {
                   {{ t('common.frequencyPenalty') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" :value="settings.frequencyPenalty"
+                  <input type="text" v-model="settings.frequencyPenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
 
@@ -122,7 +124,7 @@ async function saveUserConfig() {
             </div>
 
             <div>
-              <ModelSelect></ModelSelect>
+              <ModelSelect :modelId="settings.modelId"></ModelSelect>
             </div>
 
             <div>

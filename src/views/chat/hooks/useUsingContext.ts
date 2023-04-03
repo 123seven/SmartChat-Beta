@@ -1,9 +1,13 @@
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { t } from '@/locales'
+import { useAppStore } from '@/store'
+
 
 export function useUsingContext() {
-  const usingContext = ref<boolean>(true)
+  const appStore = useAppStore()
+
+  const usingContext = ref<boolean>(appStore.usingContext)
 
   function toggleUsingContext() {
     usingContext.value = !usingContext.value

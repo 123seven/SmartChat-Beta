@@ -10,7 +10,9 @@ export interface AppState {
   siderCollapsed: boolean
   theme: Theme
   language: Language
-  useEnter: boolean
+  useEnter: boolean,
+  usingContext: boolean,
+  modelId: number,
 }
 
 export function defaultSetting(): AppState {
@@ -19,6 +21,8 @@ export function defaultSetting(): AppState {
     theme: 'light',
     language: 'zh-CN',
     useEnter: false,
+    usingContext: true,
+    modelId: 4
   }
 }
 

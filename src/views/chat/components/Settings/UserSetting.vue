@@ -38,7 +38,7 @@ const subscribe = ref(0);
 // 保存用户设置
 async function saveUserConfig() {
   try {
-    await saveUserSettings(settings);
+    await saveUserSettings(settings.value);
     ElMessage({
       type: "success",
       message: "保存成功",
