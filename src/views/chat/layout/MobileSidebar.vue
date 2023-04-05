@@ -6,23 +6,13 @@ import {
   Dialog,
   DialogPanel,
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
 } from '@headlessui/vue'
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
   CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 import { useUserStore, useAuthStore } from '@/store'
 
 const route = useRoute()
@@ -35,7 +25,6 @@ interface Props {
   showNav?: boolean
 }
 const props = defineProps<Props>()
-// const mobileMenuOpen = ref(props.mobileMenuOpen)
 
 // Emit
 interface Emit {
@@ -60,6 +49,11 @@ const navigation = computed(() => {
       pathName: 'Chat',
 
     },
+    {
+        name: 'apps',
+        href: '/chat/apps',
+        pathName: 'Apps',
+    }
   ]
   if (userStore.userInfo.auth) {
     navigation.push(
@@ -72,11 +66,6 @@ const navigation = computed(() => {
         name: 'members',
         href: '/chat/members',
         pathName: 'Members',
-      },
-      {
-        name: 'apps',
-        href: '/chat/apps',
-        pathName: 'Apps',
       }
     )
   }

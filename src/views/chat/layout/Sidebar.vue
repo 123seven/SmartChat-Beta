@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script  lang="ts" setup>
 import { computed, ref } from 'vue'
 import {
   Cog8ToothIcon,
@@ -33,6 +33,12 @@ const navigation = computed(() => {
       pathName: 'Chat',
 
     },
+    {
+        name: 'apps',
+        icon: SquaresPlusIcon,
+        href: '/chat/apps',
+        pathName: 'Apps',
+    }
   ]
   if (userStore.userInfo.auth) {
     navigation.push(
@@ -53,12 +59,6 @@ const navigation = computed(() => {
         icon: UsersIcon,
         href: '/chat/members',
         pathName: 'Members',
-      },
-      {
-        name: 'apps',
-        icon: SquaresPlusIcon,
-        href: '/chat/apps',
-        pathName: 'Apps',
       }
     )
   }
@@ -86,6 +86,7 @@ async function handleSelect({ uuid }: Chat.History) {
   if (chatStore.active)
     chatStore.updateHistory(chatStore.active, { isEdit: false })
   await chatStore.setActive(uuid)
+  // router.push({ name: 'Chat', params:{uuid: uuid} })
 }
 
 // 修改对话
