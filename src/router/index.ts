@@ -36,6 +36,11 @@ const routes: RouteRecordRaw[] = [
         name: 'Apps',
         component: () => import('@/views/chat/Apps.vue'),
       },
+      {
+        path: '/chat/apps/:appId',
+        name: 'AppInfo',
+        component: () => import('@/views/chat/AppInfo.vue'),
+      },
     ],
   },
   {

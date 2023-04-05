@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { fetchUserSettings, saveUserSettings } from "@/api";
+import { fetchUserSettings } from "@/api";
 import { useUserStore } from "@/store";
 import { SystemSetting, UserSetting } from './components'
 
@@ -41,7 +41,7 @@ async function fetchUserConfig() {
     loading.value = true;
     const { data } = await fetchUserSettings<Settings>();
     settings.value = data;
-    // todo 更新userStore
+    // 更新userStore
     userStore.updateUserInfo(data);
   } finally {
     loading.value = false;

@@ -87,3 +87,28 @@ export function fetchPricingPlan<T>() {
     url: '/api/v1/pricing/plans',
   })
 }
+
+export function fetchApps<T>(name?: string) {
+  return get<T>({
+    url: '/api/v1/app/list',
+    data: {
+      name: name
+    }
+  })
+}
+
+export function fetchApp<T>(appId: string) {
+  return get<T>({
+    url: `/api/v1/app/${appId}`,
+  })
+}
+
+
+export function fetchAppAsk<T>(appId: string, message: string) {
+  return post<T>({
+    url: `/api/v1/app/${appId}`,
+    data: {
+      message: message
+    }
+  })
+}
