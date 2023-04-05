@@ -88,11 +88,18 @@ export function fetchPricingPlan<T>() {
   })
 }
 
-export function fetchApps<T>(name?: string) {
+export function fetchAppTags<T>() {
+  return get<T>({
+    url: `/api/v1/app/tags`,
+  })
+}
+
+export function fetchApps<T>(name?: string, tagId?: string) {
   return get<T>({
     url: '/api/v1/app/list',
     data: {
-      name: name
+      name: name,
+      tag_id: tagId
     }
   })
 }

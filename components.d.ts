@@ -20,5 +20,6 @@ declare module '@vue/runtime-core' {
     RightMessage: typeof import('./src/components/Conversation/RightMessage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TagSelect: typeof import('./src/components/TagSelect.vue')['default']
   }
 }

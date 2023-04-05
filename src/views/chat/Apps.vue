@@ -4,11 +4,14 @@ import { useRouter } from "vue-router";
 import { HeartIcon, PlayIcon } from "@heroicons/vue/20/solid";
 import { fetchApps } from "@/api";
 import { useBasicLayout } from "@/hooks/useBasicLayout";
+import { TagSelect } from "@/components";
+
 
 const router = useRouter();
 const { isMobile } = useBasicLayout();
 const loading = ref(true);
 const search = ref("");
+const tagId = ref<string>();
 
 interface App {
   id: string;
@@ -31,10 +34,10 @@ const apps = ref<Array<App>>([
 ]);
 
 // 获取应用
-async function fetchAppList(name?: string) {
+async function fetchAppList(name?: string, tagId?: string) {
   try {
     loading.value = true;
-    const { data } = await fetchApps<Array<App>>(name);
+    const { data } = await fetchApps<Array<App>>(name, tagId);
     apps.value = data;
   } finally {
     loading.value = false;
@@ -59,9 +62,15 @@ function handleEnter(event: KeyboardEvent) {
     }
   }
 }
-
+// 使用应用
 function handleAppInfo(appId: string) {
   router.push({ name: "AppInfo", params: { appId: appId } });
+}
+
+// 更换TagID
+function setTagId(id: string) {
+  tagId.value = id;
+  fetchAppList("", tagId.value);
 }
 
 onMounted(() => {
@@ -72,7 +81,7 @@ onMounted(() => {
 <template>
   <div class="px-10 py-10 overflow-y-auto md:overscroll-none">
     <div class="flex flex-row justify-between">
-      <div class="self-end relative w-3/5  md:w-1/5">
+      <div class="self-end relative w-2/5  md:w-1/5">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
           <svg
             class="w-5 h-5 text-gray-400"
@@ -96,6 +105,10 @@ onMounted(() => {
           class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
           placeholder="Search"
         />
+      </div>
+
+      <div class="w-2/5 pl-4 h-full">
+        <TagSelect :tagId="tagId" :onSetTagId="setTagId"></TagSelect>
       </div>
 
       <div

@@ -89,7 +89,7 @@ async function fetchAppInfo(appId: string) {
 async function fetchAppAskData() {
   answerLoading.value = true;
   const response = await fetch(
-    `${import.meta.env.VITE_APP_API_BASE_URL}/api/v1/app/${appId}`,
+    `${import.meta.env.VITE_APP_API_BASE_URL}api/v1/app/${appId}`,
     {
       method: "POST",
       headers: {
