@@ -4,7 +4,6 @@ import MarkdownIt from 'markdown-it'
 import mdKatex from '@traptitech/markdown-it-katex'
 import mila from 'markdown-it-link-attributes'
 import hljs from 'highlight.js'
-import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
 
 interface Props {
@@ -14,16 +13,12 @@ interface Props {
   error?: boolean
   content?: string
   loading?: boolean
-  asRawText?: boolean
+  asRawText?: boolean,
+  isMobile: boolean,
 }
 const props = defineProps<Props>()
 
-const { isMobile } = useBasicLayout()
-
-console.log("isMobile",isMobile)
-
 const textRef = ref<HTMLElement>()
-
 const mdi = new MarkdownIt({
   linkify: true,
   highlight(code, language) {
@@ -50,7 +45,7 @@ const wrapClass = computed(() => {
     'text-wrap',
     'min-w-[20px]',
     'rounded-md',
-    isMobile.value ? 'p-2' : 'px-3 py-2',
+    props.isMobile ? 'p-2' : 'px-3 py-2',
     { 'text-red-500': props.error },
   ]
 })

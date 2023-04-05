@@ -467,7 +467,7 @@ onUnmounted(() => {
         <RightMessage v-if="item.inversion" :id="index.toString()" :content="item.text"
           :avatar-url="userStore.userInfo.avatar"></RightMessage>
 
-        <LeftMessage v-else :id="index.toString()" :content="item.text" :inversion="item.inversion" :error="item.error">
+        <LeftMessage v-else :id="index.toString()" :content="item.text" :inversion="item.inversion" :error="item.error" :isMobile="isMobile">
         </LeftMessage>
       </template>
     </div>
