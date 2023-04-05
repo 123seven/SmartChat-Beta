@@ -27,7 +27,7 @@ export default {
     failed: 'Failed',
     verify: 'Verify',
     unauthorizedTips: 'Unauthorized, please verify first.',
-    productName: 'OpenChat',
+    productName: 'SmartGPT',
     userSettings: 'User Settings',
     gptSettings: 'GPT Settings',
     gptSettingsDesc: 'Set up your OpenAI API Key to get started',
@@ -80,6 +80,7 @@ export default {
     temperature: "Temperature",
     presencePenalty: "Presence penalty",
     frequencyPenalty: "Frequency penalty",
+    create: "Create"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

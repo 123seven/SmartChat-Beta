@@ -28,7 +28,7 @@ export default {
     failed: '操作失败',
     verify: '验证',
     unauthorizedTips: '未经授权，请先进行验证。',
-    productName: 'OpenChat',
+    productName: 'SmartGPT',
     userSettings: '用户设置',
     gptSettings: 'GPT设置',
     gptSettingsDesc: '设置您的OpenAI API Key开始使用',
@@ -81,6 +81,7 @@ export default {
     temperature: "回复随机性",
     presencePenalty: "话题新鲜度",
     frequencyPenalty: "对话可理解性",
+    create: "创建"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',

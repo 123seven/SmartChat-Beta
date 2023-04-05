@@ -21,11 +21,11 @@ export default defineConfig((env) => {
       VitePWA({
         injectRegister: 'auto',
         manifest: {
-          name: 'OpenChat',
-          short_name: 'OpenChat',
+          name: 'SmartGPT',
+          short_name: 'SmartGPT',
           icons: [
-            { src: 'openchat.svg', sizes: '192x192', type: 'image/svg+xml' },
-            { src: 'openchat.svg', sizes: '512x512', type: 'image/svg+xml' },
+            { src: 'SmartGPT.svg', sizes: '192x192', type: 'image/svg+xml' },
+            { src: 'SmartGPT.svg', sizes: '512x512', type: 'image/svg+xml' },
           ],
         },
       }),
