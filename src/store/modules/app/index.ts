@@ -38,6 +38,16 @@ export const useAppStore = defineStore('app-store', {
       this.recordState()
     },
 
+    setRoleId(roleId: number) {
+      this.roleId = roleId
+      this.recordState()
+    },
+
+    setRoleAvatar(roleAvatar: string) {
+      this.roleAvatar = roleAvatar
+      this.recordState()
+    },
+
     recordState() {
       setLocalSetting(this.$state)
     },

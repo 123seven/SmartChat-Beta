@@ -13,6 +13,8 @@ export interface AppState {
   useEnter: boolean,
   usingContext: boolean,
   modelId: number,
+  roleId: number,
+  roleAvatar: string,
 }
 
 export function defaultSetting(): AppState {
@@ -22,7 +24,9 @@ export function defaultSetting(): AppState {
     language: 'zh-CN',
     useEnter: false,
     usingContext: true,
-    modelId: 4
+    modelId: 4,
+    roleId: 1,
+    roleAvatar: "https://i.328888.xyz/2023/04/05/i8Fi0A.png"
   }
 }
 

@@ -24,6 +24,8 @@ declare namespace Chat {
   interface ConversationRequest {
     cid?: string | null
     usingContext?: boolean
+    roleId?: number | null
+    avatar?: string | null
   }
 
 }

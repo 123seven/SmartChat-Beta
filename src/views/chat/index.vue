@@ -33,6 +33,7 @@ import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { formatDate } from '@/utils/format'
+import { AvatarGroup } from "@/components";
 
 let controller = new AbortController()
 
@@ -118,7 +119,7 @@ async function onConversation() {
   scrollToBottom()
   loading.value = true
   prompt.value = ''
-  let options: Chat.ConversationRequest = { cid: uuid }
+  let options: Chat.ConversationRequest = { cid: uuid, roleId: appStore.roleId }
 
   if (usingContext.value)
     options.usingContext = true
@@ -130,7 +131,7 @@ async function onConversation() {
       loading: true,
       inversion: false,
       error: false,
-      conversationOptions: null,
+      conversationOptions: { avatar: appStore.roleAvatar },
       requestOptions: { prompt: message, options: { ...options } },
     },
   )
@@ -154,7 +155,7 @@ async function onConversation() {
                 inversion: false,
                 error: false,
                 loading: true,
-                conversationOptions: null,
+                conversationOptions: { avatar: appStore.roleAvatar },
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
@@ -204,7 +205,7 @@ async function onConversation() {
         inversion: false,
         error: true,
         loading: false,
-        conversationOptions: null,
+        conversationOptions: { avatar: appStore.roleAvatar },
         requestOptions: { prompt: message, options: { ...options } },
       },
     )
@@ -293,7 +294,7 @@ async function onRegenerate(index: number) {
         inversion: false,
         error: true,
         loading: false,
-        conversationOptions: null,
+        conversationOptions: { avatar: appStore.roleAvatar },
         requestOptions: { prompt: message, ...options },
       },
     )
@@ -431,7 +432,10 @@ onUnmounted(() => {
         </p>
       </div>
 
-      <div class="self-center">
+      <div class="flex justify-center items-center self-center">
+        <!-- 角色选择 -->
+        <AvatarGroup></AvatarGroup>
+       
         <!-- 主题修改 -->
         <button v-if="theme === 'light'" @click="changeTheme('dark')" type="button"
           class="inline-flex items-center rounded-full border border-transparent bg-black p-2 text-white shadow-sm">
@@ -467,7 +471,13 @@ onUnmounted(() => {
         <RightMessage v-if="item.inversion" :id="index.toString()" :content="item.text"
           :avatar-url="userStore.userInfo.avatar"></RightMessage>
 
-        <LeftMessage v-else :id="index.toString()" :content="item.text" :inversion="item.inversion" :error="item.error" :isMobile="isMobile">
+        <LeftMessage v-else 
+        :id="index.toString()" 
+        :avatarUrl="item.conversationOptions?.avatar"
+        :content="item.text" 
+        :inversion="item.inversion" 
+        :error="item.error" 
+        :isMobile="isMobile">
         </LeftMessage>
       </template>
     </div>

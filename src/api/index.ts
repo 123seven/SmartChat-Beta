@@ -119,3 +119,10 @@ export function fetchAppAsk<T>(appId: string, message: string) {
     }
   })
 }
+
+
+export function fetchRoles<T>() {
+  return get<T>({
+    url: `/api/v1/chat/roles`,
+  })
+}

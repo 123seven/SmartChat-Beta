@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AvatarGroup: typeof import('./src/components/AvatarGroup.vue')['default']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -18,6 +19,7 @@ declare module '@vue/runtime-core' {
     LeftMessage: typeof import('./src/components/Conversation/LeftMessage.vue')['default']
     ModelSelect: typeof import('./src/components/ModelSelect.vue')['default']
     RightMessage: typeof import('./src/components/Conversation/RightMessage.vue')['default']
+    RoleSelect: typeof import('./src/components/RoleSelect.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TagSelect: typeof import('./src/components/TagSelect.vue')['default']

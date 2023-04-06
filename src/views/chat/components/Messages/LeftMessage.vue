@@ -8,7 +8,7 @@ import { t } from '@/locales'
 
 interface Props {
   id: string
-  avatarUrl?: string
+  avatarUrl?: string | null
   inversion?: boolean
   error?: boolean
   content?: string
@@ -71,7 +71,14 @@ defineExpose({ textRef })
   >
     <div class="flex items-center">
       <div class="flex items-center justify-center rounded-full flex-shrink-0">
+        <img
+        v-if="props.avatarUrl"
+        class="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
+        :src="props.avatarUrl"
+        alt="avatar"
+        />
         <svg
+          v-else
           fill="#000000"
           class="h-10 w-10"
           viewBox="0 0 24 24"
