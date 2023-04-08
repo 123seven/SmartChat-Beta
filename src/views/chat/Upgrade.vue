@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { CheckIcon } from '@heroicons/vue/20/solid'
-
 import { fetchPricingPlan } from '@/api'
-import { da } from 'element-plus/es/locale'
+import { ActivationCode } from "@/components";
 
 
 interface Feature {
@@ -19,29 +18,39 @@ interface Plan {
   features: Feature
 }
 
-interface PlanResponse {
+interface Plans {
   billing: Array<string>;
   按月计费: Array<Plan>;
   按年计费: Array<Plan>;
 }
 
-const pricingPlans = ref<PlanResponse>()
+interface PlanResponse {
+  plans:Plans
+  user_plan: number
+}
+
+const pricingPlans = ref<Plans>()
 const activePlans = ref<Array<Plan>>()
 const active = ref<string>('')
+const showActivationCodeDialog = ref<boolean>(false)
+const isOpenActivationCode = ref(false)
+const userPlanId = ref<number>()
+
 
 // 获取定价计划
 async function fetchData() {
   try {
     const { data } = await fetchPricingPlan<PlanResponse>()
-    active.value = data.billing[0]
-    pricingPlans.value = data
-    activePlans.value = data.按月计费
-
+    active.value = data.plans.billing[0]
+    pricingPlans.value = data.plans
+    activePlans.value = data.plans.按月计费
+    userPlanId.value = data.user_plan
   } catch (error) {
     //
   }
 }
 
+// 更换定价计划
 function changeActive(billing: string) {
   active.value = billing
   if (!pricingPlans.value) {
@@ -54,6 +63,17 @@ function changeActive(billing: string) {
   }
 
 }
+
+// 关闭激活码对话框
+function closeModal() {
+  isOpenActivationCode.value = false
+}
+
+// 开启激活码对话框
+function openModal() {
+  isOpenActivationCode.value = true
+}
+
 onMounted(() => {
   fetchData();
 });
@@ -74,7 +94,21 @@ onMounted(() => {
             {{ item }}
           </button>
         </div>
+
+
+        <div class="fixed right-0 flex items-center justify-center  px-2 mx-6 ">
+          <button
+            type="button"
+            @click="openModal"
+            class="rounded-md bg-black bg-opacity-200 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          >
+          {{ $t("common.useActivationCode") }}
+          </button>
+        </div>
       </div>
+
+      <ActivationCode :isOpen="isOpenActivationCode" :onClose="closeModal" :onOpen="openModal"></ActivationCode>
+
       <div
         class="mt-12 space-y-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
         <div v-for="plan in activePlans" :key="plan.zh_name"
@@ -86,10 +120,10 @@ onMounted(() => {
               <span class="text-4xl font-bold tracking-tight ">¥{{ plan.price }}</span>
 
             </p>
-            <div
-              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-800 py-2 text-center text-sm font-semibold text-white hover:bg-gray-900">
-              {{ $t('common.select') }}
-            </div>
+            <button
+              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-500 py-2 text-center text-sm font-semibold text-white">
+              {{ userPlanId === plan.id ? $t('common.currentPackage') :  $t('common.select') }}
+            </button>
           </div>
           <div class="px-6 pt-6 pb-8">
             <h3 class="text-sm font-medium ">{{ $t('common.included') }}</h3>

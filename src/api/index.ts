@@ -126,3 +126,19 @@ export function fetchRoles<T>() {
     url: `/api/v1/chat/roles`,
   })
 }
+
+
+export function fetchActivationCode<T>(code: string) {
+  return post<T>({
+    url: `/api/v1/pricing/activation_code`,
+    data: {
+      code: code
+    }
+  })
+}
+
+export function fetchUserPlan<T>(code: string) {
+  return get<T>({
+    url: `/api/v1/pricing/plan`,
+  })
+}
