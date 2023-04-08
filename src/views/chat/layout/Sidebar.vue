@@ -131,7 +131,7 @@ function isActive(uuid: string) {
 
 // 用户登出
 function handleSignOut() {
-  console.log('user Sign Out', userStore.userInfo.id)
+  console.log('user Sign Out:', userStore.userInfo.id)
   authStore.removeToken()
   userStore.resetUserInfo()
 }

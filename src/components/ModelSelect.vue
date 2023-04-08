@@ -33,7 +33,6 @@ const props = defineProps<Props>()
 const selected = ref(models[props.modelId-1 || 4])
 
 function setModel(modelId:  number) {
-  console.log('modelId', modelId)
   appStore.setModelId(modelId)
 }
 </script>

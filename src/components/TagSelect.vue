@@ -10,7 +10,6 @@ import {
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import { fetchAppTags } from "@/api";
 import { t } from "@/locales";
-import { da } from "element-plus/es/locale";
 
 interface Tag {
   id: string;
@@ -71,13 +70,6 @@ onMounted(() => {
     <div class="relative">
       <ListboxButton class="relative w-4/5  md:w-1/2 cursor-default rounded-md border border-gray-300 bg-white dark:bg-[#252529] dark:text-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
         <span class="flex items-center">
-          <!-- <span
-            :aria-label="selected.online ? 'Online' : 'Offline'"
-            :class="[
-              selected.online ? 'bg-green-400' : 'bg-gray-200',
-              'inline-block h-2 w-2 flex-shrink-0 rounded-full',
-            ]"
-          /> -->
           <span class="ml-3 block truncate">{{ selected.name }}</span>
         </span>
         <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

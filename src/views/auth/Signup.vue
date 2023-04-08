@@ -28,7 +28,6 @@ function validateUsername() {
 // 邮箱格式有效性验证
 function validateEmail() {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  console.log("email", SignUpData.email);
   return regex.test(SignUpData.email);
 }
 // 检查密码长度是否大于8
@@ -87,7 +86,7 @@ async function SignUp() {
       router.push("/signin");
     }, 3000);
   } catch (error: any) {
-    console.log("SignUp Error", error);
+    console.log("SignUp Error:", error);
     ElMessage({
       type: "error",
       message: error.message,

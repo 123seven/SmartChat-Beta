@@ -105,7 +105,7 @@ async function fetchAppAskData() {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-  console.log(response);
+
   // This data is a ReadableStream
   const data = response.body;
   if (!data) {

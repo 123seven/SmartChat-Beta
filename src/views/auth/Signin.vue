@@ -66,7 +66,7 @@ async function SignIn() {
     });
     router.push("/");
   } catch (error: any) {
-    console.log("SignIn Error", error);
+    console.log("SignIn Error:", error);
     ElMessage({
       type: "error",
       message: error.message,
