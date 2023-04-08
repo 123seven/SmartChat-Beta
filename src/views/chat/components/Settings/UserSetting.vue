@@ -170,7 +170,7 @@ async function saveUserConfig() {
               <button type="button"
                 class="inline-flex items-center space-x-2 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50 dark:bg-[#252529] dark:text-white">
                 <CheckBadgeIcon class="h-5 w-5 text-green-400" aria-hidden="true" />
-                <span>{{settings.userPlan.zh_name}}</span>
+                <span>{{settings.userPlan?.zh_name ?? t('common.free')}}</span>
               </button>
             </div>
           </div>

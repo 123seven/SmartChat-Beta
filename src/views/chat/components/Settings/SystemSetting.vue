@@ -69,9 +69,9 @@ async function saveUserConfig() {
                 </label>
                 <div class="mt-2 flex rounded-md">
                   <el-tooltip :content="$t('common.contextCountDesc')" placement="bottom">
-                    <input type="text" name="company-website" id="company-website" v-model="settings.contextCount"
+                    <input type="text" v-model="settings.contextCount"
                     class="block w-1/5 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    placeholder="" />
+                    placeholder="5" />
                   </el-tooltip>
                   <button type="button"
                     class="inline-flex items-center space-x-2 ml-5 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50"
@@ -93,7 +93,7 @@ async function saveUserConfig() {
                   <el-tooltip :content="$t('common.temperatureDesc')" :raw-content="true" placement="bottom">
                     <input type="text" v-model="settings.temperature"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    placeholder="5" />
+                    placeholder="0.5" />
                   </el-tooltip>
                 </div>
               </div>
@@ -108,7 +108,7 @@ async function saveUserConfig() {
                   <el-tooltip :content="$t('common.presencePenaltyDesc')" :raw-content="true" placement="bottom">
                     <input type="text" v-model="settings.presencePenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    placeholder="5" />
+                    placeholder="0.0" />
                   </el-tooltip>
                 </div>
               </div>
@@ -121,7 +121,7 @@ async function saveUserConfig() {
                   <el-tooltip :content="$t('common.frequencyPenaltyDesc')" :raw-content="true" placement="bottom">
                     <input type="text" v-model="settings.frequencyPenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    placeholder="5" />
+                    placeholder="0.0" />
                   </el-tooltip>
                 </div>
               </div>
@@ -137,7 +137,7 @@ async function saveUserConfig() {
               </label>
               <div class="mt2 flex">
                 <div class="relative flex flex-1">
-                  <input name="apiKey" id="apiKey"  v-model="settings.apiKey"
+                  <input v-model="settings.apiKey"
                     class="flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 dark:bg-[#252529] dark:text-white sm:text-sm sm:leading-6"
                     placeholder="sk-xxxxxx" />
                 </div>

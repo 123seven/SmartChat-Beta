@@ -7,6 +7,13 @@ import { SystemSetting, UserSetting } from './components'
 const loading = ref(true);
 const userStore = useUserStore();
 
+interface userPlan {
+  id: string;
+  zh_name: string;
+  en_name: string;
+  zh_tw_name: string;
+}
+
 interface Settings {
   id: string;
   avatar: string;
@@ -19,6 +26,7 @@ interface Settings {
   temperature: number,
   presencePenalty: number,
   frequencyPenalty: number,
+  userPlan: userPlan,
 }
 
 const settings = ref<Settings>({
@@ -33,6 +41,12 @@ const settings = ref<Settings>({
   temperature: 0.5,
   presencePenalty: 0.0,
   frequencyPenalty: 0.0,
+  userPlan: {
+    id: "",
+    zh_name: "",
+    en_name: "",
+    zh_tw_name: "",
+  }
 });
 
 // 获取用户设置
