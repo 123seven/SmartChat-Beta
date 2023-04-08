@@ -13,6 +13,8 @@ declare namespace Chat {
     title: string
     isEdit: boolean
     uuid: string
+    roleId?: number | null
+    avatar?: string | null
   }
 
   interface ChatState {
@@ -25,7 +27,6 @@ declare namespace Chat {
     cid?: string | null
     usingContext?: boolean
     roleId?: number | null
-    avatar?: string | null
   }
 
 }

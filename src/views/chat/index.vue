@@ -131,7 +131,7 @@ async function onConversation() {
       loading: true,
       inversion: false,
       error: false,
-      conversationOptions: { avatar: appStore.roleAvatar },
+      conversationOptions: null,
       requestOptions: { prompt: message, options: { ...options } },
     },
   )
@@ -155,7 +155,7 @@ async function onConversation() {
                 inversion: false,
                 error: false,
                 loading: true,
-                conversationOptions: { avatar: appStore.roleAvatar },
+                conversationOptions: null,
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
@@ -205,7 +205,7 @@ async function onConversation() {
         inversion: false,
         error: true,
         loading: false,
-        conversationOptions: { avatar: appStore.roleAvatar },
+        conversationOptions: null,
         requestOptions: { prompt: message, options: { ...options } },
       },
     )
@@ -294,7 +294,7 @@ async function onRegenerate(index: number) {
         inversion: false,
         error: true,
         loading: false,
-        conversationOptions: { avatar: appStore.roleAvatar },
+        conversationOptions: null,
         requestOptions: { prompt: message, ...options },
       },
     )
@@ -351,9 +351,6 @@ function handleClear() {
 // 回车发送消息
 function handleEnter(event: KeyboardEvent) {
   if (loading.value) return
-
-  console.log('handleEnter')
-  console.log('enterSend.value', enterSend.value)
   // 禁止回车发送消息
   if (!enterSend.value) {
     return
@@ -417,7 +414,15 @@ onUnmounted(() => {
   <div class="flex-shrink-0">
     <div class="flex flex-row justify-between px-4 py-5 sm:px-6">
       <div>
-        <h3 class="text-base font-semibold leading-6 dark:text-gray-200">
+        <h3 v-if="isMobile" class="text-base font-semibold leading-6 dark:text-gray-200">
+          {{
+            currentChatHistory?.title ? (
+            currentChatHistory.title.length > 8 ? currentChatHistory.title.slice(0, 8) +
+              '...' : currentChatHistory.title
+          ) : 'New Chat'
+          }}
+        </h3>
+        <h3 v-else class="text-base font-semibold leading-6 dark:text-gray-200">
           {{
             currentChatHistory?.title ? (
             currentChatHistory.title.length > 16 ? currentChatHistory.title.slice(0, 16) +
@@ -434,7 +439,7 @@ onUnmounted(() => {
 
       <div class="flex justify-center items-center self-center">
         <!-- 角色选择 -->
-        <AvatarGroup></AvatarGroup>
+        <AvatarGroup/>
        
         <!-- 主题修改 -->
         <button v-if="theme === 'light'" @click="changeTheme('dark')" type="button"
@@ -473,7 +478,7 @@ onUnmounted(() => {
 
         <LeftMessage v-else 
         :id="index.toString()" 
-        :avatarUrl="item.conversationOptions?.avatar"
+        :avatarUrl="currentChatHistory?.avatar"
         :content="item.text" 
         :inversion="item.inversion" 
         :error="item.error" 
