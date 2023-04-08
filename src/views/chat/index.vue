@@ -425,7 +425,7 @@ onUnmounted(() => {
         <h3 v-else class="text-base font-semibold leading-6 dark:text-gray-200">
           {{
             currentChatHistory?.title ? (
-            currentChatHistory.title.length > 16 ? currentChatHistory.title.slice(0, 16) +
+            currentChatHistory.title.length > 30 ? currentChatHistory.title.slice(0, 30) +
               '...' : currentChatHistory.title
           ) : 'New Chat'
           }}

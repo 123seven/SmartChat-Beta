@@ -39,7 +39,7 @@ export default {
     hide: '隱藏',
     getApiKey: '從OpenAi獲取您的ApiKey請點擊此處',
     gptModel: '模型',
-    subscription: '訂閱',
+    subscribe: '訂閱',
     personal: '個人',
     team: '團隊',
     sysBaseSettings: '系統設定',
@@ -85,7 +85,12 @@ export default {
     useActivationCode: "激活碼激活",
     activation: "激活",
     activationCodeDocs: "請輸入的你激活碼，然後點擊下面的激活按鈕即可兌換，如果你沒有激活碼，請點擊此處去購買",
-    currentPackage: "當前套餐"
+    currentPackage: "當前套餐",
+    contextCountDesc: "每次請求對話時攜帶的最大歷史消息數，範圍0-20",
+    temperatureDesc: "對於轉換任務（提取、標準化、格式轉換、語法修復），首選溫度為 0 或最高 0.3。 <br />對於寫作任務，您應該將溫度調高一些，接近 0.5。 <br />如果您希望 GPT 具有高度創造性（例如用於營銷或廣告文案），請考慮 0.7 到 1 之間的值。",
+    presencePenaltyDesc: "存在懲罰參數鼓勵模型做出新穎的預測。 <br />如果某個詞已經出現在預測文本中，則存在懲罰會降低該詞的概率。 <br />較高的值，模型會更多地推薦新的內容。",
+    frequencyPenaltyDesc: "頻率懲罰參數控制模型重複預測的趨勢。 <br />頻率懲罰降低了已經生成單詞的概率。懲罰取決於一個詞在預測中已經出現了多少次。 <br />較高的值，模型的回復會更加多樣。",
+    free: "免費"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

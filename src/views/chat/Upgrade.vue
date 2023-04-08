@@ -26,7 +26,7 @@ interface Plans {
 
 interface PlanResponse {
   plans:Plans
-  user_plan: number
+  user_plan: number | null
 }
 
 const pricingPlans = ref<Plans>()
@@ -34,7 +34,7 @@ const activePlans = ref<Array<Plan>>()
 const active = ref<string>('')
 const showActivationCodeDialog = ref<boolean>(false)
 const isOpenActivationCode = ref(false)
-const userPlanId = ref<number>()
+const userPlanId = ref<number | null>()
 
 
 // 获取定价计划
