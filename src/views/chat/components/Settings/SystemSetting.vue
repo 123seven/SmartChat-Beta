@@ -68,10 +68,11 @@ async function saveUserConfig() {
                   {{ t('common.contextCount') }}
                 </label>
                 <div class="mt-2 flex rounded-md">
-                  <input type="text" name="company-website" id="company-website" v-model="settings.contextCount"
+                  <el-tooltip :content="$t('common.contextCountDesc')" placement="bottom">
+                    <input type="text" name="company-website" id="company-website" v-model="settings.contextCount"
                     class="block w-1/5 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="" />
-
+                  </el-tooltip>
                   <button type="button"
                     class="inline-flex items-center space-x-2 ml-5 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50"
                     @click="settings.usingContext = !settings.usingContext">
@@ -83,16 +84,17 @@ async function saveUserConfig() {
               </div>
             </div>
 
-            <div class="w-1/5">
+            <div class="w-2/5">
               <div class="col-span-3 sm:col-span-2">
                 <label class="block text-sm font-medium leading-6">
                   {{ t('common.temperature') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" v-model="settings.temperature"
+                  <el-tooltip :content="$t('common.temperatureDesc')" :raw-content="true" placement="bottom">
+                    <input type="text" v-model="settings.temperature"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
-
+                  </el-tooltip>
                 </div>
               </div>
             </div>
@@ -103,10 +105,11 @@ async function saveUserConfig() {
                   {{ t('common.presencePenalty') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" v-model="settings.presencePenalty"
+                  <el-tooltip :content="$t('common.presencePenaltyDesc')" :raw-content="true" placement="bottom">
+                    <input type="text" v-model="settings.presencePenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
-
+                  </el-tooltip>
                 </div>
               </div>
 
@@ -115,10 +118,11 @@ async function saveUserConfig() {
                   {{ t('common.frequencyPenalty') }}
                 </label>
                 <div class="relative mt-2 flex rounded-md shadow-sm">
-                  <input type="text" v-model="settings.frequencyPenalty"
+                  <el-tooltip :content="$t('common.frequencyPenaltyDesc')" :raw-content="true" placement="bottom">
+                    <input type="text" v-model="settings.frequencyPenalty"
                     class="block w-1/5 flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="5" />
-
+                  </el-tooltip>
                 </div>
               </div>
             </div>
@@ -131,17 +135,12 @@ async function saveUserConfig() {
               <label class="block text-sm font-medium leading-6">
                 {{ t('common.apiKey') }}
               </label>
-              <div class="mt-2 flex">
-                <div class="relative flex flex-grow items-stretch focus-within:z-10">
-                  <input name="apiKey" id="apiKey"
-                    class="block w-full flex-1 rounded-none rounded-l-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 dark:bg-[#252529] dark:text-white sm:text-sm sm:leading-6"
+              <div class="mt2 flex">
+                <div class="relative flex flex-1">
+                  <input name="apiKey" id="apiKey"  v-model="settings.apiKey"
+                    class="flex-1 rounded-md border-0 pl-2 py-1.5 ring-1 ring-inset ring-gray-300 dark:bg-[#252529] dark:text-white sm:text-sm sm:leading-6"
                     placeholder="sk-xxxxxx" />
                 </div>
-                <button type="button"
-                  class="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:dark:bg-[#161618]">
-                  <EyeIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                  <span>{{ t('common.use') }}</span>
-                </button>
               </div>
               <p class="mt-2 text-sm text-gray-500">
                 {{ t('common.getApiKey') }}

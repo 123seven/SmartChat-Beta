@@ -80,7 +80,12 @@ export default {
     temperature: "Temperature",
     presencePenalty: "Presence penalty",
     frequencyPenalty: "Frequency penalty",
-    create: "Create"
+    create: "Create",
+    activationCode: "Activation Code",
+    useActivationCode: "Use activation code",
+    activation: "Activation",
+    activationCodeDocs: "Please enter your activation code, and then click the activation button below to redeem, if you do not have an activation code, please click here to buy",
+    currentPackage: "Current Package"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

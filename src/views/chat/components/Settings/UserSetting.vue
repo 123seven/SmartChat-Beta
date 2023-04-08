@@ -9,7 +9,8 @@ import {
   UserIcon,
   UserGroupIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
+  CheckBadgeIcon,
 } from "@heroicons/vue/20/solid";
 import { ElDialog, ElMessage } from "element-plus";
 import { useUserStore } from "@/store";
@@ -19,11 +20,19 @@ const userStore = useUserStore();
 const appStore = useAppStore()
 const { theme } = useTheme()
 
+interface userPlan {
+  id: string;
+  zh_name: string;
+  en_name: string;
+  zh_tw_name: string;
+}
+
 interface Settings {
   id: string;
   avatar: string;
   username: string;
   email: string;
+  userPlan: userPlan
 }
 
 interface Props {
@@ -33,7 +42,6 @@ const props = defineProps<Props>()
 const settings = ref<Settings>(props.settings)
 
 const showAvatarDialogVisible = ref(false);
-const subscribe = ref(0);
 
 // 保存用户设置
 async function saveUserConfig() {
@@ -49,7 +57,7 @@ async function saveUserConfig() {
       username: settings.value.username,
     });
   } catch (error: any) {
-    console.log("SignIn Error", error);
+    console.log("SignIn Error:", error);
     ElMessage({
       type: "error",
       message: error.message,
@@ -160,43 +168,10 @@ async function saveUserConfig() {
             </label>
             <div class="mt-2 flex items-center">
               <button type="button"
-                class="inline-flex items-center space-x-2 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50 dark:bg-[#252529] dark:text-white"
-                @click="subscribe = 0" :class="[
-                  subscribe == 0
-                    ? 'bg-gray-50 dark:bg-white'
-                    : 'bg-white dark:bg-gray-800',
-                ]">
-                <span :class="[subscribe == 0 ? 'bg-green-400' : 'bg-gray-200']"
-                  class="inline-block h-2 w-2 flex-shrink-0 rounded-full" aria-hidden="true" />
-                <KeyIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                <span>免费</span>
+                class="inline-flex items-center space-x-2 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50 dark:bg-[#252529] dark:text-white">
+                <CheckBadgeIcon class="h-5 w-5 text-green-400" aria-hidden="true" />
+                <span>{{settings.userPlan.zh_name}}</span>
               </button>
-
-              <!-- <button @click="subscribe = 1" type="button"
-                          class="inline-flex items-center space-x-2 ml-5 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50 dark:bg-[#252529] dark:text-white"
-                          :class="[
-                            subscribe == 1
-                              ? 'bg-gray-50 dark:bg-white'
-                              : 'bg-white dark:bg-gray-800',
-                          ]">
-                          <span class="inline-block h-2 w-2 flex-shrink-0 rounded-full"
-                            :class="[subscribe == 1 ? 'bg-green-400' : 'bg-gray-200']" aria-hidden="true" />
-                          <UserIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                          <span>{{ t('common.personal') }}</span>
-                        </button>
-
-                        <button type="button"
-                          class="inline-flex items-center space-x-2 ml-5 rounded-md border border-gray-300 py-1.5 px-2.5 text-sm font-semibold shadow-sm hover:bg-gray-50 dark:bg-[#252529] dark:text-white"
-                          :class="[
-                            subscribe == 2
-                              ? 'bg-gray-50 dark:bg-white'
-                              : 'bg-white dark:bg-gray-800',
-                          ]">
-                          <span class="inline-block h-2 w-2 flex-shrink-0 rounded-full"
-                            :class="[subscribe == 2 ? 'bg-green-400' : 'bg-gray-200']" />
-                          <UserGroupIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                          <span>{{ t('common.team') }}</span>
-                        </button> -->
             </div>
           </div>
         </div>

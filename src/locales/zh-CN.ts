@@ -80,8 +80,17 @@ export default {
     contextCount: "携带历史消息数",
     temperature: "回复随机性",
     presencePenalty: "话题新鲜度",
-    frequencyPenalty: "对话可理解性",
-    create: "创建"
+    frequencyPenalty: "话题多样性",
+    create: "创建",
+    activationCode: "激活码",
+    useActivationCode: "激活码激活",
+    activation: "激活",
+    activationCodeDocs: "请输入的你激活码，然后点击下面的激活按钮即可兑换，如果你没有激活码，请点击此处去购买",
+    currentPackage: "当前套餐",
+    contextCountDesc: "每次请求对话时携带的最大历史消息数，范围0-20",
+    temperatureDesc: "对于转换任务（提取、标准化、格式转换、语法修复），首选温度为 0 或最高 0.3。<br />对于写作任务，您应该将温度调高一些，接近 0.5。<br />如果您希望 GPT 具有高度创造性（例如用于营销或广告文案），请考虑 0.7 到 1 之间的值。",
+    presencePenaltyDesc: "存在惩罚参数鼓励模型做出新颖的预测。<br />如果某个词已经出现在预测文本中，则存在惩罚会降低该词的概率。<br />较高的值，模型会更多地推荐新的内容。",
+    frequencyPenaltyDesc: "频率惩罚参数控制模型重复预测的趋势。<br />频率惩罚降低了已经生成单词的概率。惩罚取决于一个词在预测中已经出现了多少次。<br />较高的值，模型的回复会更加多样。"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',

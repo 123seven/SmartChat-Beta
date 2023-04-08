@@ -80,7 +80,12 @@ export default {
     temperature: "回复隨機性",
     presencePenalty: "話題新鮮度",
     frequencyPenalty: "對話可理解性",
-    create: "新建"
+    create: "新建",
+    activationCode: "激活碼",
+    useActivationCode: "激活碼激活",
+    activation: "激活",
+    activationCodeDocs: "請輸入的你激活碼，然後點擊下面的激活按鈕即可兌換，如果你沒有激活碼，請點擊此處去購買",
+    currentPackage: "當前套餐"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',
