@@ -21,11 +21,10 @@ export default defineConfig((env) => {
       VitePWA({
         injectRegister: 'auto',
         manifest: {
-          name: 'SmartGPT',
-          short_name: 'SmartGPT',
+          name: 'SmartChat',
+          short_name: 'SmartChat',
           icons: [
-            { src: 'SmartGPT.svg', sizes: '192x192', type: 'image/svg+xml' },
-            { src: 'SmartGPT.svg', sizes: '512x512', type: 'image/svg+xml' },
+            { src: 'SmartChat.svg', sizes: '192x192', type: 'image/svg+xml' },
           ],
         },
       }),

@@ -27,7 +27,7 @@ export default {
     failed: 'Failed',
     verify: 'Verify',
     unauthorizedTips: 'Unauthorized, please verify first.',
-    productName: 'SmartGPT',
+    productName: 'SmartChat',
     userSettings: 'User Settings',
     gptSettings: 'GPT Settings',
     gptSettingsDesc: 'Set up your OpenAI API Key to get started',

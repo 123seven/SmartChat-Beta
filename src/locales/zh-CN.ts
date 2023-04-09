@@ -28,7 +28,7 @@ export default {
     failed: '操作失败',
     verify: '验证',
     unauthorizedTips: '未经授权，请先进行验证。',
-    productName: 'SmartGPT',
+    productName: 'SmartChat',
     userSettings: '用户设置',
     gptSettings: 'GPT设置',
     gptSettingsDesc: '设置您的OpenAI API Key开始使用',
