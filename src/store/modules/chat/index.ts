@@ -106,7 +106,7 @@ export const useChatStore = defineStore('chat-store', {
       const index = this.chat.findIndex((item) => item.uuid === uuid)
       if (index !== -1) {
         this.chat[index].data.push(chat)
-        if (this.history[index].title === 'New Chat' || this.history[0].title.search('New Chat By') != -1)
+        if (this.history[index].title === 'New Chat' || (this.history[0].title.search('New Chat By') != -1 && chat.inversion))
           this.history[index].title = chat.text
         this.recordState()
       }
