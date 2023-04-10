@@ -50,6 +50,12 @@ export function fetchVerify<T>(token: string) {
   })
 }
 
+export function fetchUserInfo<T>() {
+  return get<T>({
+    url: '/api/v1/user/info',
+  })
+}
+
 export function fetchSignIn<T>(email: string, password: string) {
   return post<T>({
     url: '/api/v1/user/signin',

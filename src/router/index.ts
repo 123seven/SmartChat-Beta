@@ -54,6 +54,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/auth/Signup.vue'),
   },
   {
+    path: '/oatuh',
+    name: 'Oatuh',
+    component: () => import('@/views/auth/Oauth.vue'),
+  },
+  {
     path: '/404',
     name: '404',
     component: () => import('@/views/exception/400.vue'),

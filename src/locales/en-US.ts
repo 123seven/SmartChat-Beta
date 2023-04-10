@@ -90,7 +90,9 @@ export default {
     temperatureDesc: "For transformation tasks (extraction, standardization, format conversion, grammar fixes) prefer a temperature of 0 or up to 0.3. <br />For writing tasks, you should juice the temperature higher, closer to 0.5. <br />If you want GPT to be highly creative (for marketing or advertising copy for instance), consider values between 0.7 and 1.",
     presencePenaltyDesc: "The presence penalty parameter encourages the model to make novel predictions.<br />The presence penalty lowers the probability of a word if it already appeared in the predicted text.",
     frequencyPenaltyDesc: "The frequency penalty parameter controls the model’s tendency to repeat predictions. <br />The frequency penalty reduces the probability of words that have already been generated. <br />The penalty depends on how many times a word has already occurred in the prediction.",
-    free: "Free"
+    free: "Free",
+    signWithGoogle: "Sign in with Google",
+    signWithGithub: "Sign in with Github"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',
