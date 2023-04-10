@@ -88,6 +88,7 @@ async function fetchAppInfo(appId: string) {
 // 获取应用回答
 async function fetchAppAskData() {
   answerLoading.value = true;
+  answer.value = ""
   const response = await fetch(
     `${import.meta.env.VITE_APP_API_BASE_URL}api/v1/app/${appId}`,
     {
