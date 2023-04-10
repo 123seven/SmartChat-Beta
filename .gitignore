@@ -185,3 +185,5 @@ cython_debug/
 *.sqlite3-*
 
 *.html
+
+dist
