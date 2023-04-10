@@ -154,7 +154,7 @@ async function SignIn() {
             or sign in with
           </p>
           <a
-          href="https://openai-api.unknownbyte.com/api/v1/user/oauth?type=github"
+          href="https://openai-api.unknownbyte.com/api/v1/user/signin/github"
 
             class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
