@@ -92,7 +92,9 @@ export default {
     frequencyPenaltyDesc: "頻率懲罰參數控制模型重複預測的趨勢。 <br />頻率懲罰降低了已經生成單詞的概率。懲罰取決於一個詞在預測中已經出現了多少次。 <br />較高的值，模型的回復會更加多樣。",
     free: "免費",
     signWithGoogle: "Google賬號登錄",
-    signWithGithub: "Github賬號登錄"
+    signWithGithub: "Github賬號登錄",
+    changeAvatarDosc: "請輸入圖像鏈接",
+    beta: "體驗版"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

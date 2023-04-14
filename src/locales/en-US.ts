@@ -92,7 +92,9 @@ export default {
     frequencyPenaltyDesc: "The frequency penalty parameter controls the model’s tendency to repeat predictions. <br />The frequency penalty reduces the probability of words that have already been generated. <br />The penalty depends on how many times a word has already occurred in the prediction.",
     free: "Free",
     signWithGoogle: "Sign in with Google",
-    signWithGithub: "Sign in with Github"
+    signWithGithub: "Sign in with Github",
+    changeAvatarDosc: "Please enter the avatar link",
+    beta: "BETA"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

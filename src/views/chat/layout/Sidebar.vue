@@ -164,8 +164,8 @@ const bgColorList = [
         {{ $t('common.productName') }}
       </span>
       <span
-        class="bg-[#9750dd] text-white rounded ml-1 px-1 text-sm font-bold leading-none"
-        >BETA</span
+        class="bg-[#9750dd] text-white rounded ml-1 px-1 py-1 text-sm font-bold leading-none"
+        >{{ $t('common.beta') }}</span
       >
     </div>
 
@@ -268,11 +268,11 @@ const bgColorList = [
     <!-- user info -->
     <div
       v-if="userStore.userInfo.auth"
-      class="flex items-center justify-between mt-8"
+      class="flex items-center justify-between mt-6"
     >
       <div class="flex items-center gap-x-2">
         <img
-          class="object-cover rounded-full h-7 w-7"
+          class="object-cover rounded-full h-9 w-9"
           :src="userStore.userInfo.avatar"
           alt="avatar"
         />
@@ -305,13 +305,12 @@ const bgColorList = [
       </el-tooltip>
     </div>
 
-    <div v-else class="flex items-center justify-between mt-8">
-      <el-tooltip content="登录" placement="bottom">
-        <ArrowLeftOnRectangleIcon
-          @click="handleSignIn"
-          class="w-5 h-5 text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400"
-        ></ArrowLeftOnRectangleIcon>
-      </el-tooltip>
+    <div v-else class="flex items-center justify-between mt-6">
+      <div class="flex items-center gap-x-2">
+        <button @click="handleSignIn" type="button" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+          {{ $t("common.login") }}
+          </button>
+      </div>
     </div>
   </div>
 </template>

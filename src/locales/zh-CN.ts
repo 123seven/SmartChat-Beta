@@ -93,7 +93,9 @@ export default {
     frequencyPenaltyDesc: "频率惩罚参数控制模型重复预测的趋势。<br />频率惩罚降低了已经生成单词的概率。惩罚取决于一个词在预测中已经出现了多少次。<br />较高的值，模型的回复会更加多样。",
     free: "免费",
     signWithGoogle: "Google账号登录",
-    signWithGithub: "Github账号登录"
+    signWithGithub: "Github账号登录",
+    changeAvatarDosc: "请输入头像链接",
+    beta: "体验版"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
