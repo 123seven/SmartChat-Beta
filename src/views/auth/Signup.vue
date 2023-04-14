@@ -2,9 +2,11 @@
 import { fetchSignUp } from "@/api";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
+import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from "@/locales";
 
 const router = useRouter();
+const { isMobile } = useBasicLayout()
 
 const SignUpData = {
   username: "",
@@ -93,6 +95,20 @@ async function SignUp() {
     });
   }
 }
+// 回车登录
+function handleEnter(event: KeyboardEvent) {
+  if (!isMobile.value) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      SignUp()
+    }
+  } else {
+    if (event.key === 'Enter' && event.ctrlKey) {
+      event.preventDefault()
+      SignUp()
+    }
+  }
+}
 </script>
 
 <template>
@@ -104,7 +120,7 @@ async function SignUp() {
             <span class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
               {{ $t('common.productName') }}
             </span>
-            <span class="bg-[#9750dd] text-white rounded ml-1 px-1 text-sm font-bold leading-none">BETA</span>
+            <span class="bg-[#9750dd] text-white rounded ml-1 px-1 py-1 text-sm font-bold leading-none">{{ $t('common.beta') }}</span>
           </div>
         </div>
 
@@ -215,6 +231,7 @@ async function SignUp() {
 
           <input
             v-model="SignUpData.passwordRepeat"
+            @keypress="handleEnter"
             type="password"
             class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Confirm Password"
@@ -232,7 +249,6 @@ async function SignUp() {
           <div class="mt-6 text-center">
             <router-link
               to="/signin"
-              href="#"
               class="text-sm text-blue-500 hover:underline dark:text-blue-400"
             >
               {{ t('common.haveAccount') }}

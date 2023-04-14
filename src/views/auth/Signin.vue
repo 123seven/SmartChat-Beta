@@ -3,11 +3,13 @@ import { fetchSignIn } from "@/api";
 import { useAuthStore, useUserStore } from "@/store";
 import { useRouter } from "vue-router";
 import { ElDialog, ElMessage, ElMessageBox } from "element-plus";
+import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from "@/locales";
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const router = useRouter();
+const { isMobile } = useBasicLayout()
 
 const SignInData = {
   email: "",
@@ -73,6 +75,21 @@ async function SignIn() {
     });
   }
 }
+
+// 回车登录
+function handleEnter(event: KeyboardEvent) {
+  if (!isMobile.value) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      SignIn()
+    }
+  } else {
+    if (event.key === 'Enter' && event.ctrlKey) {
+      event.preventDefault()
+      SignIn()
+    }
+  }
+}
 </script>
 
 <template>
@@ -83,7 +100,7 @@ async function SignIn() {
           <span class="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
             {{ $t('common.productName') }}
           </span>
-          <span class="bg-[#9750dd] text-white rounded ml-1 px-1 text-sm font-bold leading-none">BETA</span>
+          <span class="bg-[#9750dd] text-white rounded ml-1 px-1 py-1 text-sm font-bold leading-none">{{ $t('common.beta') }}</span>
         </div>
 
         <h1 class="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">
@@ -136,6 +153,7 @@ async function SignIn() {
 
           <input
             v-model="SignInData.password"
+            @keypress="handleEnter"
             type="password"
             class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Password"
