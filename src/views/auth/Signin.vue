@@ -171,7 +171,8 @@ function handleEnter(event: KeyboardEvent) {
           <p class="mt-4 text-center text-gray-600 dark:text-gray-400">
             or sign in with
           </p>
-          <a
+          <!-- Github登录，由于国内网络不稳定暂时不显示该方式 -->
+          <!-- <a
           href="https://openai-api.unknownbyte.com/api/v1/user/signin/github"
 
             class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -201,7 +202,7 @@ function handleEnter(event: KeyboardEvent) {
             </svg>
 
             <span class="mx-2">{{ t("common.signWithGithub") }}</span>
-          </a>
+          </a> -->
 
           <a
             href="#"

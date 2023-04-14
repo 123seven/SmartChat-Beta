@@ -82,7 +82,7 @@ async function SignUp() {
     );
     ElMessage({
       type: "success",
-      message: "注册成功，3秒后将自动跳转到登录页面",
+      message: "注册成功，请您到您的邮箱中点击激活链接来激活您的帐号",
     });
     setTimeout(() => {
       router.push("/signin");
@@ -237,6 +237,8 @@ function handleEnter(event: KeyboardEvent) {
             placeholder="Confirm Password"
           />
         </div>
+
+        <div class="mt-2 text-sm text-red-400">如果多次未收到激活邮件，请更换邮箱后再试！</div>
 
         <div class="mt-6">
           <button
