@@ -506,7 +506,7 @@ onUnmounted(() => {
       <div class="relative flex items-center my-5 mx-5">
         <!-- 是否允许回车发送 -->
         <el-tooltip v-if="!isMobile" :content="!enterSend ? '允许回车发送' : '禁止回车发送'" placement="bottom" effect="light">
-          <div class="absolute right-28 focus:outline-none rtl:left-0 rtl:right-auto">
+          <div class="absolute right-20 focus:outline-none rtl:left-0 rtl:right-auto">
             <ChevronUpIcon class="w-6 h-6 mx-4" @click="changeEnterSend" :class="[
               !enterSend
                 ? 'text-gray-400 dark:text-gray-500'
@@ -516,11 +516,11 @@ onUnmounted(() => {
         </el-tooltip>
 
         <!-- Promtp提示 -->
-        <el-tooltip v-if="!isMobile" content="选择Prompt" placement="bottom" effect="light">
+        <!-- <el-tooltip v-if="!isMobile" content="选择Prompt" placement="bottom" effect="light">
           <div class="absolute right-20 focus:outline-none rtl:left-0 rtl:right-auto">
             <PlusCircleIcon @click="handlePrompt" class="w-6 h-6 mx-4 text-gray-700 dark:text-gray-100"></PlusCircleIcon>
           </div>
-        </el-tooltip>
+        </el-tooltip> -->
 
         <!-- 是否需要携带聊天历史信息 -->
         <el-tooltip :content="!usingContext ? '使用连续对话模式' : '关闭连续对话模式'" placement="bottom" effect="light">
