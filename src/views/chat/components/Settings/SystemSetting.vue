@@ -128,7 +128,7 @@ async function saveUserConfig() {
             </div>
 
             <div>
-              <ModelSelect :modelId="settings.modelId"></ModelSelect>
+              <ModelSelect :modelId="settings.modelId" :apiKey="settings.apiKey"></ModelSelect>
             </div>
 
             <div>
