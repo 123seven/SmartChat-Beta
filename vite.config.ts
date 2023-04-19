@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { VitePluginRadar } from 'vite-plugin-radar'
 
 
 export default defineConfig((env) => {
@@ -34,6 +35,12 @@ export default defineConfig((env) => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      VitePluginRadar({
+        // Google Analytics tag injection
+        analytics: {
+          id: 'G-L7B4CBRGN6',
+        },
+      })
     ],
     server: {
       host: '0.0.0.0',
