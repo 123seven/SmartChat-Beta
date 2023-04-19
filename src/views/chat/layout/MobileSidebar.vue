@@ -62,11 +62,11 @@ const navigation = computed(() => {
         href: '/chat/upgrade',
         pathName: 'Upgrade',
       },
-      {
-        name: 'members',
-        href: '/chat/members',
-        pathName: 'Members',
-      }
+      // {
+      //   name: 'members',
+      //   href: '/chat/members',
+      //   pathName: 'Members',
+      // }
     )
   }
   return navigation

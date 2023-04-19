@@ -186,4 +186,4 @@ cython_debug/
 
 *.html
 
-dist
+dist/
