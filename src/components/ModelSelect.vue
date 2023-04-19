@@ -35,7 +35,7 @@ const models = computed(() => {
   return models;
 });
 
-const selected = ref(models.value.find(element => element.id == props.modelId ?? 5));
+const selected = ref(models.value.find(element => element.id == props.modelId) || models.value[0]);
 
 function setModel(modelId: number) {
   appStore.setModelId(modelId);
