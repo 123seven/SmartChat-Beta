@@ -15,8 +15,6 @@ import {
   fetchCheckOrder,
   fetchManualCheckOrder,
 } from "@/api";
-import { parseTime } from "@/utils/format";
-import { da } from "element-plus/es/locale";
 
 interface UserPlan {
   plan_id: number;
