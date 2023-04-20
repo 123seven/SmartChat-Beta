@@ -95,7 +95,10 @@ export default {
     signWithGoogle: "Google账号登录",
     signWithGithub: "Github账号登录",
     changeAvatarDosc: "请输入头像链接",
-    beta: "体验版"
+    beta: "体验版",
+    newSubscribe: "新增订阅",
+    paid: "已支付",
+    pay: "支付"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',

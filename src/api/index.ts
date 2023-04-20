@@ -148,3 +148,32 @@ export function fetchUserPlan<T>(code: string) {
     url: `/api/v1/pricing/plan`,
   })
 }
+
+
+export function fetchCreateOrder<T>(plan_id: number) {
+  return post<T>({
+    url: `/api/v1/order/create`,
+    data: {
+      PlanId: plan_id
+    }
+  })
+}
+
+
+export function fetchCheckOrder<T>(order_id: number) {
+  return get<T>({
+    url: `/api/v1/order/status`,
+    data: {
+      orderId: order_id
+    }
+  })
+}
+
+export function fetchManualCheckOrder<T>(order_id: number) {
+  return get<T>({
+    url: `/api/v1/order/manual_confirm`,
+    data: {
+      orderId: order_id
+    }
+  })
+}

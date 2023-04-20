@@ -2,11 +2,20 @@
 import { onMounted, ref } from 'vue'
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import { fetchPricingPlan } from '@/api'
-import { ActivationCode } from "@/components";
+import { ActivationCode, CreateOrder } from "@/components";
 
 
 interface Feature {
   zh: Array<string>
+}
+interface UserPlan {
+  plan_id: number,
+  zh_name: string,
+  zh_tw_name: string,
+  en_name: string,
+  usage_count: number,
+  start_time: string,
+  expire_time: string,
 }
 
 interface Plan {
@@ -15,7 +24,8 @@ interface Plan {
   list_price: number,
   price: number
   zh_desc: string,
-  features: Feature
+  features: Feature,
+  en_name: string,
 }
 
 interface Plans {
@@ -26,7 +36,7 @@ interface Plans {
 
 interface PlanResponse {
   plans:Plans
-  user_plan: number | null
+  user_plan?: UserPlan
 }
 
 const pricingPlans = ref<Plans>()
@@ -34,7 +44,10 @@ const activePlans = ref<Array<Plan>>()
 const active = ref<string>('')
 const showActivationCodeDialog = ref<boolean>(false)
 const isOpenActivationCode = ref(false)
-const userPlanId = ref<number | null>()
+const isOpenCreateOrder = ref(false)
+const selectedPlan = ref<Plan>()
+const userPlan = ref<UserPlan>()
+
 
 
 // 获取定价计划
@@ -44,7 +57,7 @@ async function fetchData() {
     active.value = data.plans.billing[0]
     pricingPlans.value = data.plans
     activePlans.value = data.plans.按月计费
-    userPlanId.value = data.user_plan
+    userPlan.value = data.user_plan
   } catch (error) {
     //
   }
@@ -69,9 +82,25 @@ function closeModal() {
   isOpenActivationCode.value = false
 }
 
+
+function handleCreateOrder(plan: Plan){
+  selectedPlan.value = plan
+  isOpenCreateOrder.value = true
+
+}
 // 开启激活码对话框
 function openModal() {
   isOpenActivationCode.value = true
+}
+
+// 关闭订单对话框
+function closeOrderModal() {
+  isOpenCreateOrder.value = false
+}
+
+// 开启订单对话框
+function openOrderModal() {
+  isOpenCreateOrder.value = true
 }
 
 onMounted(() => {
@@ -108,6 +137,7 @@ onMounted(() => {
       </div>
 
       <ActivationCode :isOpen="isOpenActivationCode" :onClose="closeModal" :onOpen="openModal"></ActivationCode>
+      <CreateOrder :isOpen="isOpenCreateOrder"  :plan="selectedPlan" :user_plan="userPlan" :onClose="closeOrderModal" :onOpen="openOrderModal"></CreateOrder>
 
       <div
         class="mt-12 space-y-4 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:mx-auto lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-4">
@@ -118,11 +148,13 @@ onMounted(() => {
             <p class="mt-4 text-sm text-gray-500">{{ plan.zh_desc }}</p>
             <p class="mt-8">
               <span class="text-4xl font-bold tracking-tight ">¥{{ plan.price }}</span>
-
             </p>
             <button
-              class="mt-8 block w-full rounded-md border border-gray-800 bg-gray-500 py-2 text-center text-sm font-semibold text-white">
-              {{ userPlanId === plan.id ? $t('common.currentPackage') :  $t('common.select') }}
+              :disabled="plan.en_name == 'Free'"
+              :class="[plan.en_name == 'Free'? 'bg-gray-600' : 'bg-[#252529] dark:bg-blue-500 hover:bg-[#161618]']"
+              @click="handleCreateOrder(plan)"
+              class="mt-8 block w-full rounded-md border border-gray-800  py-2 text-center text-sm font-semibold text-white">
+              {{ userPlan?.plan_id === plan.id ? $t('common.currentPackage') :  $t('common.select') }}
             </button>
           </div>
           <div class="px-6 pt-6 pb-8">

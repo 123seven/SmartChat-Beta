@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ActivationCode: typeof import('./src/components/ActivationCode.vue')['default']
     AvatarGroup: typeof import('./src/components/AvatarGroup.vue')['default']
+    CreateOrder: typeof import('./src/components/CreateOrder.vue')['default']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElDialog: typeof import('element-plus/es')['ElDialog']
