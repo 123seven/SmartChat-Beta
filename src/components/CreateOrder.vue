@@ -323,8 +323,8 @@ function countdownPay(endTime: Date) {
 
                       <div class="mt-4 text-gray-400">{{ order.order_name }}</div>
                       <div class="mt-4">
-                        <span class="text-sm">￥</span>
-                        <span class="text-xl font-medium leading-6">{{ order.order_price }}</span>
+                        <span class="text-sm text-black">￥</span>
+                        <span class="text-xl font-medium leading-6 text-black">{{ order.order_price }}</span>
                       </div>
                       <div class="w-3/5 h-3/5">
                         <img :src="order.qrcode" alt="pay-qrcode">
