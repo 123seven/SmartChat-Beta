@@ -231,12 +231,12 @@ async function handleManualCheckOrder() {
 // 支付倒计时
 function countdownPay(endTime: Date) {
   const now = new Date();
-  const msec = endTime - now;
+  const msec = endTime.valueOf() - now.valueOf();
 
   if (msec < 0) return;
-  let hr = parseInt((msec / 1000 / 60 / 60) % 24);
-  let min = parseInt((msec / 1000 / 60) % 60);
-  let sec = parseInt((msec / 1000) % 60);
+  let hr = parseInt(((msec / 1000 / 60 / 60) % 24).toString());
+  let min = parseInt(((msec / 1000 / 60) % 60).toString());
+  let sec = parseInt(((msec / 1000) % 60).toString());
 
   waitingHour.value = hr > 9 ? hr : "0" + hr;
   waitingMinute.value = min > 9 ? min : "0" + min;
