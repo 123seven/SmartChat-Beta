@@ -5,10 +5,24 @@ import zhCN from './zh-CN'
 import zhTW from './zh-TW'
 import { useAppStoreWithOut } from '@/store/modules/app'
 import type { Language } from '@/store/modules/app/helper'
+import { usePreferredLanguages } from '@vueuse/core'
 
 const appStore = useAppStoreWithOut()
+const languages = usePreferredLanguages()
 
-const defaultLocale = appStore.language || 'zh-CN'
+let defaultLocale = appStore.language
+
+if (!defaultLocale) {
+  if (languages.value[0] == 'en') {
+    defaultLocale = 'en-US'
+  } else if (languages.value[0] == 'zh-CN' || languages.value[0] == 'zh') {
+    defaultLocale = 'zh-CN'
+  } else if (languages.value[0] == 'zh-TW' || languages.value[0] == 'zh-HK') {
+    defaultLocale = 'zh-TW'
+  } else {
+    defaultLocale = 'zh-CN'
+  }
+}
 
 const i18n = createI18n({
   locale: defaultLocale,

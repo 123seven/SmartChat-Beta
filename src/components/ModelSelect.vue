@@ -9,7 +9,6 @@ import {
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
 import { useAppStore } from "@/store";
-import { useLanguage } from "@/hooks/useLanguage";
 import { t } from "@/locales";
 
 const appStore = useAppStore();

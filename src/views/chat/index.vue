@@ -33,7 +33,6 @@ import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { formatDate } from '@/utils/format'
-import { AvatarGroup } from "@/components";
 
 let controller = new AbortController()
 
@@ -453,7 +452,7 @@ onUnmounted(() => {
         </button>
 
         <!-- 清空聊天记录 -->
-        <el-tooltip content="清空聊天记录" placement="bottom" effect="light">
+        <el-tooltip :content="t('common.clearChatHistory')" placement="bottom" effect="light">
           <button @click="handleClear" type="button"
             class="ml-2 inline-flex items-center rounded-full border border-transparent bg-red-600 p-2 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <ArchiveBoxXMarkIcon class="h-5 w-5" aria-hidden="true" />

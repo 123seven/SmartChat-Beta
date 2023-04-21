@@ -94,7 +94,16 @@ export default {
     signWithGoogle: "Sign in with Google",
     signWithGithub: "Sign in with Github",
     changeAvatarDosc: "Please enter the avatar link",
-    beta: "BETA"
+    beta: "BETA",
+    newSubscribe: "Add a new subscription",
+    paid: "paid",
+    pay: "Payment",
+    tryOut: "Try Out",
+    or: "OR",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    changeEmailTryagain: "If you have not received the activation email for many times, please change the email address and try again!",
+    clearChatHistory: "Clear Chat History"
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

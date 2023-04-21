@@ -154,8 +154,8 @@ function handleEnter(event: KeyboardEvent) {
           <input
             v-model="SignUpData.username"
             type="text"
-            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Username"
+            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-10 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            :placeholder="t('common.username')"
           />
         </div>
 
@@ -180,8 +180,8 @@ function handleEnter(event: KeyboardEvent) {
           <input
             v-model="SignUpData.email"
             type="email"
-            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Email address"
+            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-10 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            :placeholder="t('common.email')"
           />
         </div>
 
@@ -207,7 +207,7 @@ function handleEnter(event: KeyboardEvent) {
             v-model="SignUpData.password"
             type="password"
             class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Password"
+            :placeholder="t('common.password')"
           />
         </div>
 
@@ -234,11 +234,11 @@ function handleEnter(event: KeyboardEvent) {
             @keypress="handleEnter"
             type="password"
             class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Confirm Password"
+            :placeholder="t('common.confirmPassword')"
           />
         </div>
 
-        <div class="mt-2 text-sm text-red-400">如果多次未收到激活邮件，请更换邮箱后再试！</div>
+        <div class="mt-2 text-sm text-red-400">{{ t('common.changeEmailTryagain') }}</div>
 
         <div class="mt-6">
           <button

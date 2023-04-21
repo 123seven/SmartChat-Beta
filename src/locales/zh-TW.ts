@@ -94,7 +94,16 @@ export default {
     signWithGoogle: "Google賬號登錄",
     signWithGithub: "Github賬號登錄",
     changeAvatarDosc: "請輸入圖像鏈接",
-    beta: "體驗版"
+    beta: "體驗版",
+    newSubscribe: "新增訂閱",
+    paid: "已繳付",
+    pay: "支付",
+    tryOut: "試用",
+    or: "或",
+    password: "密碼",
+    confirmPassword: "確認密碼",
+    changeEmailTryagain: "如多次未收到激活郵件，請更換郵箱地址後重試！",
+    clearChatHistory: "清除聊天記錄"
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

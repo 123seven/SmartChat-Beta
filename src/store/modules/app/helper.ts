@@ -9,7 +9,7 @@ export type Language = 'zh-CN' | 'zh-TW' | 'en-US'
 export interface AppState {
   siderCollapsed: boolean
   theme: Theme
-  language: Language
+  language: Language | string
   useEnter: boolean,
   usingContext: boolean,
   modelId: number,
@@ -21,7 +21,7 @@ export function defaultSetting(): AppState {
   return {
     siderCollapsed: false,
     theme: 'light',
-    language: 'zh-CN',
+    language: '',
     useEnter: false,
     usingContext: true,
     modelId: 4,

@@ -98,7 +98,13 @@ export default {
     beta: "体验版",
     newSubscribe: "新增订阅",
     paid: "已支付",
-    pay: "支付"
+    pay: "支付",
+    tryOut: "试用",
+    or: "或",
+    password: "密码",
+    confirmPassword: "确认密码",
+    changeEmailTryagain: "如果多次未收到激活邮件，请更换邮箱后再试！",
+    clearChatHistory: "清空聊天记录"
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',

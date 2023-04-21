@@ -128,8 +128,8 @@ function handleEnter(event: KeyboardEvent) {
           <input
             v-model="SignInData.email"
             type="email"
-            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Email address"
+            class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-10 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+            :placeholder="t('common.email')"
           />
         </div>
 
@@ -156,7 +156,7 @@ function handleEnter(event: KeyboardEvent) {
             @keypress="handleEnter"
             type="password"
             class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-            placeholder="Password"
+            :placeholder="t('common.password')"
           />
         </div>
 
@@ -169,7 +169,7 @@ function handleEnter(event: KeyboardEvent) {
           </button>
 
           <p class="mt-4 text-center text-gray-600 dark:text-gray-400">
-            or sign in with
+            {{ t('common.or') }}
           </p>
           <!-- Github登录，由于国内网络不稳定暂时不显示该方式 -->
           <!-- <a
@@ -208,7 +208,7 @@ function handleEnter(event: KeyboardEvent) {
             href="#"
             class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
-            <span class="mx-2">我只想试用一下</span>
+            <span class="mx-2">{{ t('common.tryOut') }}</span>
           </a>
 
           <div class="mt-6 text-center">
