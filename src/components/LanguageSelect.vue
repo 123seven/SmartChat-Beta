@@ -85,7 +85,7 @@ const selected = computed({
                 </span>
               </div>
 
-              <span v-if="selected" :class="[
+              <span v-if="selected == item" :class="[
                 selected == item ? 'text-white' : 'text-indigo-600',
                 'absolute inset-y-0 right-0 flex items-center pr-4',
               ]">

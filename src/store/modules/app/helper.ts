@@ -9,24 +9,24 @@ export type Language = 'zh-CN' | 'zh-TW' | 'en-US'
 export interface AppState {
   siderCollapsed: boolean
   theme: Theme
-  language: Language | string
-  useEnter: boolean,
-  usingContext: boolean,
-  modelId: number,
-  roleId: number,
-  roleAvatar: string,
+  language: Language | null
+  useEnter: boolean
+  usingContext: boolean
+  modelId: number
+  roleId: number
+  roleAvatar: string
 }
 
 export function defaultSetting(): AppState {
   return {
     siderCollapsed: false,
     theme: 'light',
-    language: '',
+    language: null,
     useEnter: false,
     usingContext: true,
     modelId: 4,
     roleId: 1,
-    roleAvatar: "https://i.328888.xyz/2023/04/05/i8Fi0A.png"
+    roleAvatar: 'https://i.328888.xyz/2023/04/05/i8Fi0A.png',
   }
 }
 

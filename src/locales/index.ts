@@ -22,6 +22,7 @@ if (!defaultLocale) {
   } else {
     defaultLocale = 'zh-CN'
   }
+  appStore.setLanguage(defaultLocale)
 }
 
 const i18n = createI18n({
