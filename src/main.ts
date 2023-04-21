@@ -4,6 +4,7 @@ import { setupAssets } from './plugins'
 import { setupI18n } from './locales'
 import { setupStore } from './store'
 import { setupRouter } from './router'
+import { inject } from '@vercel/analytics'
 
 async function bootstrap() {
   const app = createApp(App)
@@ -17,6 +18,8 @@ async function bootstrap() {
   await setupRouter(app)
 
   app.mount('#app')
+
+  inject()
 }
 
 bootstrap()
