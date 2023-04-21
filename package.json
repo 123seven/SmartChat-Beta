@@ -12,6 +12,7 @@
     "@headlessui/vue": "^1.7.12",
     "@heroicons/vue": "^2.0.16",
     "@traptitech/markdown-it-katex": "^3.6.0",
+    "@vercel/analytics": "^1.0.0",
     "@vueuse/core": "^9.13.0",
     "axios": "^1.3.4",
     "canvas-confetti": "^1.6.0",
