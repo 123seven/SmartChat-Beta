@@ -1,7 +1,6 @@
 import path from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { VitePWA } from 'vite-plugin-pwa'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -19,16 +18,6 @@ export default defineConfig((env) => {
     },
     plugins: [
       vue(),
-      VitePWA({
-        injectRegister: 'auto',
-        manifest: {
-          name: 'SmartChat',
-          short_name: 'SmartChat',
-          icons: [
-            { src: 'SmartChat.svg', sizes: '192x192', type: 'image/svg+xml' },
-          ],
-        },
-      }),
       AutoImport({
         resolvers: [ElementPlusResolver()],
       }),
