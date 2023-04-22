@@ -103,7 +103,9 @@ export default {
     password: "Password",
     confirmPassword: "Confirm Password",
     changeEmailTryagain: "If you have not received the activation email for many times, please change the email address and try again!",
-    clearChatHistory: "Clear Chat History"
+    clearChatHistory: "Clear Chat History",
+    welcome: "Welcome",
+    gotIt: "Got it, thanks!",
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

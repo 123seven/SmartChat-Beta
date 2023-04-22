@@ -104,7 +104,9 @@ export default {
     password: "密码",
     confirmPassword: "确认密码",
     changeEmailTryagain: "如果多次未收到激活邮件，请更换邮箱后再试！",
-    clearChatHistory: "清空聊天记录"
+    clearChatHistory: "清空聊天记录",
+    welcome: "欢迎使用",
+    gotIt: "开始使用",
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',

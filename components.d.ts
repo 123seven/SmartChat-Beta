@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     LanguageSelect: typeof import('./src/components/LanguageSelect.vue')['default']
     LeftMessage: typeof import('./src/components/Conversation/LeftMessage.vue')['default']
+    MessageBox: typeof import('./src/components/MessageBox.vue')['default']
     ModelSelect: typeof import('./src/components/ModelSelect.vue')['default']
     RightMessage: typeof import('./src/components/Conversation/RightMessage.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

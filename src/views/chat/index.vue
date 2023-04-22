@@ -188,7 +188,7 @@ async function onConversation() {
         uuid,
         dataSources.value.length - 1,
         {
-          text: `${currentChat.text}\n[${errorMessage}]`,
+          text: `${errorMessage}`,
           error: false,
           loading: false,
         },
@@ -397,6 +397,11 @@ function changeTheme(theme: Theme) {
   console.log('change theme:', theme)
   appStore.setTheme(theme)
 }
+// 关闭通知对话框
+function closeMessageBox() {
+  appStore.setNotify()
+}
+
 
 onMounted(() => {
   scrollToBottom()
@@ -409,6 +414,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <MessageBox :isOpen="appStore.notify" :onClose="closeMessageBox"/>
   <!-- title -->
   <div class="flex-shrink-0">
     <div class="flex flex-row justify-between px-4 py-5 sm:px-6">

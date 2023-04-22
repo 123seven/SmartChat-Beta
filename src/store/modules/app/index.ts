@@ -48,6 +48,11 @@ export const useAppStore = defineStore('app-store', {
       this.recordState()
     },
 
+    setNotify() {
+      this.notify = false
+      this.recordState()
+    },
+
     recordState() {
       setLocalSetting(this.$state)
     },

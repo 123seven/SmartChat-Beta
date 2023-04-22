@@ -15,6 +15,7 @@ export interface AppState {
   modelId: number
   roleId: number
   roleAvatar: string
+  notify: boolean
 }
 
 export function defaultSetting(): AppState {
@@ -27,6 +28,7 @@ export function defaultSetting(): AppState {
     modelId: 4,
     roleId: 1,
     roleAvatar: 'https://i.328888.xyz/2023/04/05/i8Fi0A.png',
+    notify: true,
   }
 }
 

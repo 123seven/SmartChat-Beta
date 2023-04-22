@@ -103,7 +103,9 @@ export default {
     password: "密碼",
     confirmPassword: "確認密碼",
     changeEmailTryagain: "如多次未收到激活郵件，請更換郵箱地址後重試！",
-    clearChatHistory: "清除聊天記錄"
+    clearChatHistory: "清除聊天記錄",
+    welcome: "歡迎",
+    gotIt: "開始使用",
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',

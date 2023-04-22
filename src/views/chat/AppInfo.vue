@@ -200,10 +200,10 @@ onMounted(() => {
             />
 
             <div class="flex gap-4 self-end pt-6">
-              <button
+              <!-- <button
                 type="button"
                 class="mx-atuo rounded-xl border bg-white px-8 py-2 font-medium text-black hover:bg-gray-200/80"
-              >收藏</button>
+              >收藏</button> -->
               <button
                 @click="fetchAppAskData"
                 type="button"
