@@ -1,10 +1,15 @@
+// @ts-nocheck
 import type { Router } from 'vue-router'
 import { useAuthStoreWithout } from '@/store/modules/auth'
 
 export function setupPageGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
-    const authStore = useAuthStoreWithout()
+    if (to.meta.title) {
+      document.title = to.meta.title || 'SmartChat-beta' 
+    }
     next()
+    // const authStore = useAuthStoreWithout()
+    // next()
 
     // if (!authStore.session) {
     //   try {
