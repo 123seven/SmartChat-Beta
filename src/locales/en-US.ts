@@ -106,6 +106,7 @@ export default {
     clearChatHistory: "Clear Chat History",
     welcome: "Welcome",
     gotIt: "Got it, thanks!",
+    chooseChatRole: "Choose Chat Role",
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

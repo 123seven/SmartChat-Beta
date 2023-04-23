@@ -106,6 +106,7 @@ export default {
     clearChatHistory: "清除聊天記錄",
     welcome: "歡迎",
     gotIt: "開始使用",
+    chooseChatRole: "選擇對話角色",
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',
