@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { useAppStore, useChatStore } from "@/store";
+import { useAppStore, useChatStore, useUserStore } from "@/store";
 import { useChat } from "@/views/chat/hooks/useChat";
 import { fetchRoles } from "@/api";
 import { v4 as uuidv4 } from "uuid";
@@ -13,10 +12,12 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/vue";
-import { EnvelopeIcon, PhoneIcon, XMarkIcon } from "@heroicons/vue/20/solid";
+import { XMarkIcon } from "@heroicons/vue/20/solid";
+import { ElMessage } from "element-plus";
+
 const appStore = useAppStore();
 const chatStore = useChatStore();
-const route = useRoute();
+const userStore = useUserStore();
 const { addChat } = useChat();
 const loading = ref(true);
 
@@ -27,6 +28,7 @@ interface Role {
   name_en: string;
   avatar: string;
   bio: string;
+  need_login: boolean;
 }
 
 const roles = ref<Array<Role>>([
@@ -37,6 +39,7 @@ const roles = ref<Array<Role>>([
     name_en: "Default",
     avatar: "https://i.328888.xyz/2023/04/05/i8Fi0A.png",
     bio: "你好！有什么我能帮助你的吗？",
+    need_login: false,
   },
 ]);
 
@@ -50,6 +53,13 @@ function showRoleList() {
 
 // 点击
 function clickRole(role: Role, showMsg: boolean) {
+  if (role.need_login && !userStore.userInfo.auth) {
+    ElMessage({
+      type: "warning",
+      message: "抱歉，该角色需要登录后才能使用",
+    });
+    return
+  }
   selected.value = role;
   // 改变数组顺序
   const index = roles.value.indexOf(role);
@@ -180,9 +190,9 @@ onMounted(() => {
                     <div
                       v-for="role in roles"
                       :key="role.id"
-                      :class="[role.id == selected.id ? 'border-gray-600 ring-offset-2 dark:border-[#10b982]': 'border-gray-300 dark:border-gray-600']"
+                      :class="[role.id == selected.id ? 'border-gray-600 ring-offset-2 dark:border-[#10b982]': 'border-gray-300 dark:border-gray-600', role.need_login && !userStore.userInfo.auth ? 'bg-gray-100  dark:bg-gray-900' : 'bg-white dark:bg-black']"
                       @click="clickRole(role, true)"
-                      class="relative flex items-center space-x-3 rounded-lg border bg-white dark:bg-black px-6 py-5 shadow-sm focus-within:ring-2  focus-within:ring-offset-2 hover:border-gray-600 dark:hover:border-[#10b982]"
+                      class="relative flex items-center space-x-3 rounded-lg border px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-offset-2 hover:border-gray-600 dark:hover:border-[#10b982]"
                     >
                       <div class="flex-shrink-0">
                         <img
