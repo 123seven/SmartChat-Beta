@@ -59,6 +59,14 @@ const routes: RouteRecordRaw[] = [
           title: 'AppInfo',
         },
       },
+      {
+        path: '/chat/question',
+        name: 'Question',
+        component: () => import('@/views/chat/Question.vue'),
+        meta: {
+          title: 'Question',
+        },
+      },
     ],
   },
   {
