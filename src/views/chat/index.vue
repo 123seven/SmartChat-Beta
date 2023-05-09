@@ -493,6 +493,20 @@ onUnmounted(() => {
     </div>
   </div>
 
+  <div v-if="!userStore.userInfo.auth" class="flex flex-col items-center justify-center">
+    <span class="text-base">此网站是基于文心官方API实现，与文心GPT功能一致</span>
+
+    <p class="text-sm mt-1"> 如果有一天本站被墙无法打开 您可以访问: 
+      <router-link to="https://status.smartagi.top" class="text-cyan-500">
+        status.smartagi.top
+      </router-link>来查看可用网址
+    </p>
+    <p class="text-sm mt-1">如果您有任何跟AI相关建议或是想法欢迎提供，或是建议或意见请发送邮件到
+      <a href="mailto:steven.zhu.email@gmail.com" class="text-cyan-500">steven.zhu.email@gmail.com</a>
+      与我联系。
+    </p>
+  </div>
+
   <div class="flex-shrink-0">
     <!-- stop button -->
     <div v-if="loading" class="flex justify-center">
