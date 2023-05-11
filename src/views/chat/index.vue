@@ -493,7 +493,7 @@ onUnmounted(() => {
     </div>
   </div>
 
-  <div v-if="!userStore.userInfo.auth || !isMobile" class="flex flex-col items-center justify-center">
+  <div v-if="!isMobile" class="flex flex-col items-center justify-center">
     <span class="text-base">此网站是基于文心官方API实现，与文心GPT功能一致</span>
 
     <p class="text-sm mt-1"> 如果有一天本站被墙无法打开 您可以访问: 
