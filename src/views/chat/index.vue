@@ -493,7 +493,7 @@ onUnmounted(() => {
     </div>
   </div>
 
-  <div v-if="!userStore.userInfo.auth" class="flex flex-col items-center justify-center">
+  <div v-if="!userStore.userInfo.auth || !isMobile" class="flex flex-col items-center justify-center">
     <span class="text-base">此网站是基于文心官方API实现，与文心GPT功能一致</span>
 
     <p class="text-sm mt-1"> 如果有一天本站被墙无法打开 您可以访问: 
@@ -509,7 +509,7 @@ onUnmounted(() => {
 
   <div class="flex-shrink-0">
     <!-- stop button -->
-    <div v-if="loading" class="flex justify-center">
+    <div v-if="loading" class="flex justify-center mt-1">
       <button @click="handleStop"
         class="flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
         <svg class="animate-spin w-5 h-5 mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
