@@ -33,12 +33,12 @@ const navigation = computed(() => {
       pathName: 'Chat',
 
     },
-    {
-        name: 'apps',
-        icon: SquaresPlusIcon,
-        href: '/chat/apps',
-        pathName: 'Apps',
-    }
+    // {
+    //     name: 'apps',
+    //     icon: SquaresPlusIcon,
+    //     href: '/chat/apps',
+    //     pathName: 'Apps',
+    // }
   ]
   if (userStore.userInfo.auth) {
     navigation.push(
@@ -48,12 +48,12 @@ const navigation = computed(() => {
         href: '/chat/settings',
         pathName: 'Settings',
       },
-      {
-        name: 'upgrade',
-        icon: ArrowUpCircleIcon,
-        href: '/chat/upgrade',
-        pathName: 'Upgrade',
-      },
+      // {
+      //   name: 'upgrade',
+      //   icon: ArrowUpCircleIcon,
+      //   href: '/chat/upgrade',
+      //   pathName: 'Upgrade',
+      // },
       // {
       //   name: 'members',
       //   icon: UsersIcon,

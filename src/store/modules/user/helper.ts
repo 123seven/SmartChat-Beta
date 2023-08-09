@@ -18,11 +18,11 @@ export interface UserState {
 export function defaultSetting(): UserState {
   return {
     userInfo: {
-      id: '',
+      id: '1',
       avatar: 'https://i2.100024.xyz/2023/04/01/kbe6yb.webp',
-      username: '游客',
+      username: 'Test',
       email: '',
-      auth: false,
+      auth: true,
       token: '',
     },
   }

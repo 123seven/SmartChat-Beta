@@ -16,7 +16,7 @@ export function useLanguage() {
         setLocale('zh-TW')
       default:
         setLocale('zh-CN')
-        return appStore.language || 'zh-CN'
+        return appStore.language || 'en-US'
     }
   })
 

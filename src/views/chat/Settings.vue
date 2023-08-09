@@ -30,10 +30,10 @@ interface Settings {
 }
 
 const settings = ref<Settings>({
-  id: "",
-  avatar: "",
-  username: "",
-  email: "",
+  id: "1",
+  avatar: "https://i2.100024.xyz/2023/04/01/kbe6yb.webp",
+  username: "Test",
+  email: "steven.zhu.email@gmail.com",
   apiKey: undefined,
   modelId: 4,
   usingContext: true,

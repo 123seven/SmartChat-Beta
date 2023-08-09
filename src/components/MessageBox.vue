@@ -65,39 +65,11 @@ function closeModal() {
 
               <div class="mt-4">
                 <article class="prose prose-slate">
-                  <h4 class="mt-2">SmartChat 1.2发布🎉</h4>
+                  <h4 class="mt-2">This is a demo page, functionality has been limited</h4>
                   <p class="text-xs leading-none my-2.5">
-                    非常高兴，经过半个多月的不断优化、迭代，成功推出<strong>1.2</strong>版本
+                    
                   </p>
-                  <p class="text-xs leading-none my-2.5">
-                    该版本修复若干BUG，提升系统稳定性与用户体验！
-                  </p>
-                  <p class="text-xs leading-none my-2.5">
-                    由于目前项目是利用业务时间维护的，所以会有疏漏、错误、体验不佳等问题。
-                  </p>
-                  <p class="text-xs leading-none my-2.5">
-                    如果给你带来了不好的体验，作者感到非常抱歉！作者会继续不断优化、完善。
-                  </p>
-                  <p class="text-xs leading-none my-2.5">
-                    如果您有任何跟AI相关的信息欢迎提供，有任何建议或意见可以使用<a
-                      href="mailto:steven.zhu.email@gmail.com"
-                      >邮件</a
-                    >与我联系。
-                  </p>
-                  <h4 class="mt-2">初衷🚀</h4>
-                  <p class="text-xs leading-none my-2.5">
-                    也希望你能善用该工具提升生活中、工作中的生产力，多留出更多时间给自己。
-                  </p>
-                  <p class="text-xs leading-none my-2.5">
-                    希望AI🤖能提高社会的生产力，<strong>四天工作制</strong>早点到来，每个人都能空下来做自己想做的事情。
-                  </p>
-                  <h4 class="mt-2">免责声明</h4>
-                  <p class="text-xs">
-                    使用本网站提供的服务，视为您接受并同意<router-link
-                      to="/disclaimer"
-                      >《免责声明》</router-link
-                    >全部内容。🙏
-                  </p>
+
                 </article>
                 <button
                   type="button"
